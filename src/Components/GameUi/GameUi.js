@@ -10,7 +10,7 @@ export const GameUi = () => {
 
   return (
     <div style={{
-        display: 'fixed',
+        position: 'fixed',
         top: '0',
         left: '0',
     }}>
