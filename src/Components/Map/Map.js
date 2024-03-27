@@ -1,5 +1,5 @@
 import React from 'react';
-import map from '../../mapArray.json';
+import map from '../../mapMatrix.json';
 import Tile from '../Tile/Tile';
 
 
