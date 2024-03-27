@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GameContext } from '../../../GameContext';
+import { GameContext } from '../../../state/GameContext';
 
 export const BuildingMenu = () => {
   const { state, dispatch } = useContext(GameContext);

@@ -1,4 +1,5 @@
 import React, { useReducer, createContext } from 'react';
+import mapMatrix from '../mapMatrix.json';
 
 const initialState = {
     currentGoal: {
