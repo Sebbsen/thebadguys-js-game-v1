@@ -7,6 +7,7 @@ class LumberjackHutModel {
         this.jobQue = [];
         this.lvl = lvl;
         this.productionRate = 1 * lvl;
+        this.workingRadius = 1;
         this.baseWorkInterval = 1000;
         this.collectWood = collectWood;
     }
@@ -49,6 +50,25 @@ class LumberjackHutModel {
     
         prepareJob(); // Init preparation
     }
+
+    checkForAutoWork(entities) {
+        setInterval(() => {
+            if (this.jobQue.length <= 0) {
+               
+                entities.forEach(entity => {
+                    if (entity instanceof WoodModel) {
+                        let distance = Math.max(Math.abs(this.coords[0] - entity.coords[0]), Math.abs(this.coords[1] - entity.coords[1]));
+                        
+                        if (distance <= this.workingRadius) {
+                            this.addToQue(entity);
+                        }
+                    }
+                });
+            }
+        }, 1000);
+        
+    }
+    
     
 
     
