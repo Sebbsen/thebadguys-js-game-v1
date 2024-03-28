@@ -1,7 +1,7 @@
 class WoodModel {
     constructor({id, totalResource, remainingResource = totalResource}) {
         this.id = id;
-        this.coordinates = id.split('-');
+        this.coords = id.split('-');
         this.totalResource = totalResource;
         this.remainingResource = remainingResource;
     }

@@ -8,7 +8,7 @@ import WoodTile from './WoodTile/WoodTile';
 import IronTile from './IronTile/IronTile';
 import TritiumTile from './TritiumTile/TritiumTile';
 
-const Tile = ({ tileType, coordinates }) => {
+const Tile = ({ tileType, coords }) => {
     let tileComponent;
 
     switch (tileType) {
