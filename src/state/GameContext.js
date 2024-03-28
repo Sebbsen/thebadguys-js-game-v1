@@ -1,13 +1,16 @@
 import React, { useReducer, createContext } from 'react';
 import mapMatrix from '../mapMatrix.json';
 import WoodModel from '../models/WoodModel';
+import LumberjackHutModel from '../models/LumberjackHutModel';
 
-const getEntities = (mapMatrix) => {
+const getEntities = (mapMatrix, dispatch) => {
     const entities = [];
     mapMatrix.forEach((row, rowIndex) => {
         row.forEach((tile, columnIndex) => {
             if (tile === 'W') {
                 entities.push(new WoodModel({id: `${rowIndex+1}-${columnIndex+1}`, totalResource: 10}));
+            } else if (tile === 'L') {
+                entities.push(new LumberjackHutModel({id: `${rowIndex+1}-${columnIndex+1}`, collectWood: (amount) => dispatch({ type: 'ADD_WOOD', payload: amount })}));
             }
         });
     });
@@ -47,11 +50,13 @@ const gameReducer = (state, action) => {
 export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(gameReducer, initialState);
-
-  return (
-    <GameContext.Provider value={{ state, dispatch }}>
-      {children}
-    </GameContext.Provider>
-  );
+    const [state, dispatch] = useReducer(gameReducer, initialState);
+  
+    const entities = getEntities(mapMatrix, dispatch);
+  
+    return (
+      <GameContext.Provider value={{ state, dispatch, entities }}>
+        {children}
+      </GameContext.Provider>
+    );
 };
