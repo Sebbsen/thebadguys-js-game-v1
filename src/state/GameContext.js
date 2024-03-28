@@ -1,7 +1,21 @@
 import React, { useReducer, createContext } from 'react';
 import mapMatrix from '../mapMatrix.json';
+import WoodModel from '../models/WoodModel';
+
+const getEntities = (mapMatrix) => {
+    const entities = [];
+    mapMatrix.forEach((row, rowIndex) => {
+        row.forEach((tile, columnIndex) => {
+            if (tile === 'W') {
+                entities.push(new WoodModel({id: `${rowIndex+1}-${columnIndex+1}`, totalResource: 10}));
+            }
+        });
+    });
+    return entities;
+}
 
 const initialState = {
+    entities: getEntities(mapMatrix),
     currentGoal: {
         type: 'tritium',
         amount: 1000,
