@@ -1,7 +1,7 @@
 import WoodModel from './WoodModel';
 
 class LumberjackHutModel {
-    constructor({id, lvl = 1, collectWood = (amount) => {}}) {
+    constructor({id, lvl = 1, collectWood = (amount) => {}, updateResource = ({id, rescource}) => {}}) {
         this.id = id;
         this.coords = id.split('-');
         this.jobQue = [];
@@ -10,6 +10,7 @@ class LumberjackHutModel {
         this.workingRadius = 1;
         this.baseWorkInterval = 1000;
         this.collectWood = collectWood;
+        this.updateResource = updateResource;
     }
   
     addToQue(myWoodModel) {
@@ -23,8 +24,11 @@ class LumberjackHutModel {
     }
 
     doJob(myWoodModel) {
-        myWoodModel.updateResource(-this.productionRate);
+        let myWoodModelID = myWoodModel.id;
+        let productionRate = this.productionRate;
+        this.updateResource({myWoodModelID, productionRate});
         this.collectWood(this.productionRate); //TODO add a check to see if the myWoodModel is less than productionRate
+        console.log(`LumberjackHut ${this.id} collected ${this.productionRate} wood from Wood ${myWoodModel.id}`);
     }
 
     startWork() {

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GameContext } from '../../../state/GameContext';
 
-const WoodTile = () => {
+const WoodTile = ({ coords, id }) => {
+    //console.log('WoodTile rendered' + id);
+    
+    const { state } = useContext(GameContext);
+
+    const woodModelEntity = state.entities ? state.entities.find(entity => entity.id===id) : null;
+    let totalResource = woodModelEntity ? woodModelEntity.totalResource : 0;
+    let remainingResource = woodModelEntity ? woodModelEntity.remainingResource : 0;
+    
     return (
         <div
-        style={{
-            backgroundColor: "#416626",
-            width: "100%",
-            height: "100%",
-            position: "relative",
-        }}
+            style={{
+                backgroundColor: "#416626",
+                width: "100%",
+                height: "100%",
+                position: "relative",
+            }}
+            data-totalresource={totalResource}
+            data-remainingresource={remainingResource}
         >
         <img
             width="100%"
@@ -35,4 +46,4 @@ const WoodTile = () => {
     );
 };
 
-export default WoodTile;
+export default React.memo(WoodTile);

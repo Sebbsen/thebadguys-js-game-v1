@@ -9,6 +9,7 @@ export const Map = ({children}) => {
   
 
   return (
+    console.log("render Map"),
     <div style={{
         gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
         width: mapSize,
@@ -26,9 +27,10 @@ export const Map = ({children}) => {
                     }}
                 >
                     <Tile 
-                        key={`${rowIndex}-${columnIndex}`}
+                        key={`${rowIndex+1}-${columnIndex+1}`}
                         tileType={tile}
                         coords={[columnIndex,rowIndex]}
+                        id={`${rowIndex+1}-${columnIndex+1}`}
                     />
                 </div>
             ))

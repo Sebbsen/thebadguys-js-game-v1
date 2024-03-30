@@ -10,7 +10,7 @@ export const GameContent = () => {
       alignItems: 'center',
       flexDirection: 'column',
     }}>
-      <Map>      
+      <Map>
       </Map> 
     </div>
   );

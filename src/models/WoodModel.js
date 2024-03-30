@@ -1,5 +1,5 @@
 class WoodModel {
-    constructor({id, totalResource, remainingResource = totalResource}) {
+    constructor({id, totalResource = 1, remainingResource = totalResource}) {
         this.id = id;
         this.coords = id.split('-');
         this.totalResource = totalResource;
