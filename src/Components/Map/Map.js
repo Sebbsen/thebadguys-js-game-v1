@@ -1,11 +1,14 @@
 import React from 'react';
-import map from '../../mapMatrix.json';
 import Tile from '../Tile/Tile';
+import GameState from '../../state/GameManager';
 
 
 export const Map = ({children}) => {
-  const tileSize = '25px';
-  const mapSize = '800px';
+    const map = GameState.getMap();
+    const tileSize = `${map.tileSize}px`;
+    const mapSize = `${map.mapSize}px`;
+    const mapMatrix = map.mapMatrix;
+  
   
 
   return (
@@ -18,7 +21,7 @@ export const Map = ({children}) => {
         transform: "rotateX(55deg) rotateZ(45deg)",
     }}>
         {children}
-        {map.map((row, rowIndex) => (
+        {mapMatrix.map((row, rowIndex) => (
             row.map((tile, columnIndex) => (
                 <div 
                     style={{
