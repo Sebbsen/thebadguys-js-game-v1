@@ -1,12 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import GameState  from '../../../state/GameManager';
 
 export const BuildingMenu = () => {
-  GameState.getWood()
+
+  // State to hold the wood value
+  const [wood, setWood] = useState(GameState.getWood());
 
   const removeWood = () => {
-    GameState.removeWood(10)
-  }
+    GameState.removeWood(13);
+    console.log('Wood spend', 13);
+  };
+
+  useEffect(() => {
+    // What to do when the observer is triggered
+    const woodObserver = {
+      update: () => {
+        setWood(GameState.getWood());
+      }
+    };
+
+    // add observer to GameState
+    GameState.addObserver('woodChanged', woodObserver);
+
+    // removeObserver if component is unmounted
+    return () => {
+      GameState.removeObserver('woodChanged', woodObserver);
+    };
+  }, []);
 
   return (
     <div id="buildingMenu" style={{
