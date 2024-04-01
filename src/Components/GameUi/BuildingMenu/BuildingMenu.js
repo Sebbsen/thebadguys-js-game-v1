@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { GameContext } from '../../../state/GameContext';
+import GameState  from '../../../state/GameManager';
 
 export const BuildingMenu = () => {
-  const { state, dispatch } = useContext(GameContext);
+  GameState.getWood()
 
   const removeWood = () => {
-    dispatch({ type: 'REMOVE_WOOD', payload: 10 });
-  };
+    GameState.removeWood(10)
+  }
 
   return (
     <div id="buildingMenu" style={{

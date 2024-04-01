@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { GameContext } from '../../state/GameContext';
+import GameState from '../../state/GameManager';
 
 import { BuildingMenu } from './BuildingMenu/BuildingMenu';
 
 export const GameUi = () => {
-  const { state, dispatch } = useContext(GameContext);
 
   const collectWood = () => {
-    dispatch({ type: 'ADD_WOOD', payload: 1 });
+    GameState.setWood(GameState.getWood() + 1);
+    console.log(GameState.getWood());
   };
 
   return (
@@ -18,7 +18,7 @@ export const GameUi = () => {
         width: '100%',
         height: '100%',
     }}>
-      <p>Woods: {state.wood}</p>
+      <p>Woods: {GameState.getWood}</p>
       <button onClick={collectWood}>Collect Wood</button>
       <BuildingMenu />
     </div>
