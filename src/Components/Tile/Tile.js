@@ -12,7 +12,7 @@ import TritiumTile from './TritiumTile/TritiumTile';
 import BaseTile from './BaseTile/BaseTile';
 import LumberjackHutTile from './LumberjackHutTile/LumberjackHutTile';
 
-const Tile = ({ tileType, coords }) => {
+const Tile = ({ tileType, id, coords }) => {
     let tileComponent;
 
     switch (tileType) {
@@ -25,7 +25,7 @@ const Tile = ({ tileType, coords }) => {
             break;
         // Ressource tiles
         case 'W':
-            tileComponent = <WoodTile />;
+            tileComponent = <WoodTile id={id} coords={coords} />;
             break;
         case 'I':
             tileComponent = <IronTile />;

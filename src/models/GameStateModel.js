@@ -84,8 +84,12 @@ class GameStateModel {
     getEntities() {
         return this.entities;
     }
+    
+    setEntities(entities) {
+        this.entities = entities;
+    }
 
-    getEntityById(id) { 
+    getEntityById(id) {
         return this.entities.find(entity => entity.id === id); 
     }
 
@@ -105,9 +109,17 @@ class GameStateModel {
     editEntity(entity, newProperties) {
         const index = this.entities.indexOf(entity);
         if (index !== -1) {
-            this.entities[index] = { ...entity, ...newProperties };
-            this.notifyObservers('entityEdited', this.entities[index]);
+            Object.assign(this.entities[index], newProperties);
+            this.notifyObservers(`entityEdited${this.entities[index].id}`, this.entities[index]);
         }
+    }
+
+    startCheckForAutoWork() { 
+        this.entities.forEach(entity => {
+            if (entity.checkForAutoWork) {
+                entity.checkForAutoWork();
+            }
+        });
     }
 }
 

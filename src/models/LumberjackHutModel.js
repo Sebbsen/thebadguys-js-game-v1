@@ -1,7 +1,8 @@
 import WoodModel from './WoodModel';
+import GameState from '../state/GameManager';
 
 class LumberjackHutModel {
-    constructor({id, lvl = 1, collectWood = (amount) => {}}) {
+    constructor({id, lvl = 1}) {
         this.id = id;
         this.coords = id.split('-');
         this.jobQue = [];
@@ -9,7 +10,6 @@ class LumberjackHutModel {
         this.productionRate = 1 * lvl;
         this.workingRadius = 1;
         this.baseWorkInterval = 1000;
-        this.collectWood = collectWood;
     }
   
     addToQue(myWoodModel) {
@@ -23,8 +23,8 @@ class LumberjackHutModel {
     }
 
     doJob(myWoodModel) {
-        myWoodModel.updateResource(-this.productionRate);
-        this.collectWood(this.productionRate); //TODO add a check to see if the myWoodModel is less than productionRate
+        GameState.editEntity(myWoodModel, {remainingResource: myWoodModel.remainingResource - this.productionRate});
+        GameState.addWood(this.productionRate);
     }
 
     startWork() {
@@ -51,8 +51,9 @@ class LumberjackHutModel {
         prepareJob(); // Init preparation
     }
 
-    checkForAutoWork(entities) {
+    checkForAutoWork() {
         setInterval(() => {
+            const entities = GameState.getEntities();
             if (this.jobQue.length <= 0) {
                
                 entities.forEach(entity => {
