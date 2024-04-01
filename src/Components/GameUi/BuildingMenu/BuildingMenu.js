@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GameState  from '../../../state/GameManager';
 
 export const BuildingMenu = () => {
@@ -42,7 +42,9 @@ export const BuildingMenu = () => {
                 cursor: 'pointer',
             }}
             onClick={removeWood} 
-        >Buy Building</div> 
+        >
+            {wood >= 13 ? 'Buy Building' : 'Need more wood'}
+        </div> 
     </div>
   );
 };

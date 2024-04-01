@@ -9,7 +9,7 @@ const WoodTile = ({id, coords}) => {
         // What to do when the observer is triggered
         const entityObserver = {
             update: () => {
-                setEntity(prevEntity => ({ ...prevEntity, ... GameState.getEntityById(id) }));
+                setEntity(prevEntity => ({ ...prevEntity, ...GameState.getEntityById(id)}));
             }
         };
 
@@ -20,7 +20,7 @@ const WoodTile = ({id, coords}) => {
         return () => {
         GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
         };
-    }, [id]);
+    }, [id, entitiy?.id]);
 
     return (
         console.log('rerender wood:', entitiy?.id),
@@ -35,7 +35,8 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg" 
+                src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg"
+                alt=""
                 style={{
                     opacity: .9,
                 }} 
@@ -43,7 +44,8 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://static.wikia.nocookie.net/ageofempires/images/c/c7/Trees_aoe2de.png" 
+                src="https://static.wikia.nocookie.net/ageofempires/images/c/c7/Trees_aoe2de.png"
+                alt=""
                 style={{
                     position: "absolute",
                     zIndex: 1,
