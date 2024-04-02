@@ -1,13 +1,15 @@
 import './App.css';
+import React, { useState } from 'react';
+import { ReactContextProvider } from './state/ReactContext';
 import { GameContent } from './Components/GameContent/GameContent'; 
 import { GameUi } from './Components/GameUi/GameUi';
 
 function App() {
   return (
-    <div>
+    <ReactContextProvider>
       <GameUi />
       <GameContent />
-    </div>
+    </ReactContextProvider>
   );
 }
 
