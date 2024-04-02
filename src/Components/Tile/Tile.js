@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Tile.css';
+
+import { MyReactState } from '../../state/ReactContext';
 
 // Ground tiles
 import EmptyTile from './EmptyTile/EmptyTile';
@@ -14,7 +16,6 @@ import LumberjackHutTile from './LumberjackHutTile/LumberjackHutTile';
 
 const Tile = ({ tileType, id, coords }) => {
     let tileComponent;
-
     switch (tileType) {
         // Ground tiles
         case 'E':
@@ -45,7 +46,22 @@ const Tile = ({ tileType, id, coords }) => {
             break;
     }
 
-    return <div className="tile" style={{width: "100%", height: "100%"}}>{tileComponent}</div>;
+    const { state, dispatch } = useContext(MyReactState);
+
+    const handleTileClick = () => {
+        dispatch({ type: 'updateTileClickedCoords', payload: id });
+    };
+
+    return (
+        <div 
+            className="tile" 
+            data-coords={id} 
+            style={{width: "100%", height: "100%"}}
+            onClick={handleTileClick}
+        >
+            {tileComponent}
+        </div>
+    );
 };
 
 export default Tile;

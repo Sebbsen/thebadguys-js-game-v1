@@ -50,6 +50,16 @@ class GameStateModel {
         return this.map;
     }
 
+    editMap(coords, letter) {
+        const x = coords[0]-1;
+        const y = coords[1]-1;
+        
+        if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) {
+            this.map.mapMatrix[x][y] = letter;
+            this.notifyObservers('mapEdited', this.map);
+        }
+    }
+
     // resources
     getWood() {
         return this.resources.wood;
@@ -94,7 +104,12 @@ class GameStateModel {
     }
 
     addEntity(entity) {
-        this.entities.push(entity);
+        const index = this.entities.findIndex(e => e.id === entity.id);
+        if (index !== -1) {
+            this.entities[index] = entity;
+        } else {
+            this.entities.push(entity);
+        }
         this.notifyObservers('entityAdded', entity);
     }
 

@@ -23,7 +23,7 @@ const WoodTile = ({id, coords}) => {
     }, [id, entitiy?.id]);
 
     return (
-        console.log('rerender wood:', entitiy?.id),
+        //console.log('rerender wood:', entitiy?.id),
         <div
         style={{
             backgroundColor: "#416626",

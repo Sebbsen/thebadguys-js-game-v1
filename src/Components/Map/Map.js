@@ -1,17 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Tile from '../Tile/Tile';
 import GameState from '../../state/GameManager';
 
 
 export const Map = ({children}) => {
-    const map = GameState.getMap();
+    const [map, setMap] = useState(GameState.getMap());
     const tileSize = `${map.tileSize}px`;
     const mapSize = `${map.mapSize}px`;
     const mapMatrix = map.mapMatrix;
+
+    useEffect(() => {
+        // What to do when the observer is triggered
+        const mapObserver = {
+            update: () => {
+                setMap(prevMap => ({ ...prevMap, ...GameState.getMap()}));
+            }
+        };
+
+        // add observer to GameState
+        GameState.addObserver(`mapEdited`, mapObserver);
+
+        // removeObserver if component is unmounted
+        return () => {
+        GameState.removeObserver(`mapEdited`, mapObserver);
+        };
+    }, [map]);
   
   
 
   return (
+    console.log('rerender map:', map),
     <div style={{
         gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
         width: mapSize,
