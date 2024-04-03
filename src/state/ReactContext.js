@@ -3,7 +3,7 @@ import React, { createContext, useReducer } from 'react';
 export const MyReactState = createContext();
 
 const initialState = { 
-    tileClickedCoords: '',
+  alert: { message: '', isVisible: false },
     isBuilding: false,
 };
 
@@ -13,6 +13,11 @@ function reducer(state, action) {
       return { ...state, tileClickedCoords: action.payload};
     case 'updateIsBuilding':
       return { ...state, isBuilding: action.payload};
+    // Alert
+    case 'showAlert':
+      return { ...state, alert: { message: action.payload, isVisible: true } };
+    case 'hideAlert':
+      return { ...state, alert: { message: '', isVisible: false } };
     default:
       throw new Error();
   }
