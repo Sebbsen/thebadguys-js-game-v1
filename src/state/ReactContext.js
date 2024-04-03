@@ -4,11 +4,13 @@ export const MyReactState = createContext();
 
 const initialState = { 
   alert: { message: '', isVisible: false },
-    isBuilding: false,
+  tileClickedCoords: '',
+  isBuilding: false,
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    // Building
     case 'updateTileClickedCoords':
       return { ...state, tileClickedCoords: action.payload};
     case 'updateIsBuilding':
