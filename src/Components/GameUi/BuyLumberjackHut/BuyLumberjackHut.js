@@ -20,9 +20,6 @@ export const BuyLumberjackHut = () => {
     const { tileClickedCoords } = state;
     const { isBuilding } = state;
 
-    // State to hold the wood value
-    const [wood, setWood] = useState(GameState.getWood());
-
     const handleBuyBuilding = () => {
         dispatch({ type: 'updateIsBuilding', payload: true });
     };
@@ -30,9 +27,10 @@ export const BuyLumberjackHut = () => {
     // buildingTile
     useEffect(() => {
         if (isBuilding) {
-            if (wood >= buildingData.cost) {
+            const currentResource = GameState.getResources();
+            if ( currentResource[buildingData.buildResource] >= buildingData.cost) {
                 // buy building
-                GameState.removeWood(buildingData.cost);
+                GameState.changeResource(buildingData.buildResource, -buildingData.cost);
 
                 // building
                 const newLumberjackHut = new buildingData.buildingModel({ id: tileClickedCoords }); // create new building
@@ -40,29 +38,11 @@ export const BuyLumberjackHut = () => {
                 newLumberjackHut.checkForAutoWork(); // check if building can work
                 GameState.editMap(tileClickedCoords.split('-'), buildingData.TileType); // add to map
             } else {
-                dispatch({ type: 'showAlert', payload: `Not enough ${buildingData.resource}` });
+                dispatch({ type: 'showAlert', payload: `Not enough ${buildingData.buildResource}` });
                 return;
             }
         }
     }, [tileClickedCoords]);
-
-    // useEffect to add observer to GameState
-    useEffect(() => {
-        // What to do when the observer is triggered
-        const woodObserver = {
-            update: () => {
-                setWood(GameState.getWood());
-            }
-        };
-
-        // add observer to GameState
-        GameState.addObserver(`${buildingData.buildResource}Changed`, woodObserver);
-
-        // removeObserver if component is unmounted
-        return () => {
-            GameState.removeObserver(`${buildingData.buildResource}Changed`, woodObserver);
-        };
-    }, []);
 
     return (
         <div

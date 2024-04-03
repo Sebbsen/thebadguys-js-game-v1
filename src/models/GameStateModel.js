@@ -61,6 +61,15 @@ class GameStateModel {
     }
 
     // resources
+    getResources() {
+        return this.resources;
+    }
+
+    changeResource(resource, value) {
+        this.resources[resource] += value;
+        this.notifyObservers(`${resource}Changed`, this.resources[resource]);
+    }
+
     getWood() {
         return this.resources.wood;
     }
