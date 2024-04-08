@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GameState from '../../../state/GameManager';
+import GameState from '../../state/GameManager';
 
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value

@@ -4,15 +4,15 @@ import './Tile.css';
 import { MyReactState } from '../../state/ReactContext';
 
 // Ground tiles
-import EmptyTile from './EmptyTile/EmptyTile';
-import WaterTile from './WaterTile/WaterTile';
+import EmptyTile from './EmptyTile';
+import WaterTile from './WaterTile';
 // Ressource tiles
-import WoodTile from './WoodTile/WoodTile';
-import IronTile from './IronTile/IronTile';
-import TritiumTile from './TritiumTile/TritiumTile';
+import WoodTile from './WoodTile';
+import IronTile from './IronTile';
+import TritiumTile from './TritiumTile';
 // Building tiles
-import BaseTile from './BaseTile/BaseTile';
-import LumberjackHutTile from './LumberjackHutTile/LumberjackHutTile';
+import BaseTile from './BaseTile';
+import LumberjackHutTile from './LumberjackHutTile';
 
 const Tile = ({ tileType, id, coords }) => {
     let tileComponent;

@@ -1,5 +1,5 @@
 import React from 'react';
-import MainTileAsset from '../../../assets/lumberjack_hut_building.png';
+import MainTileAsset from '../../assets/lumberjack_hut_building.png';
 
 const LumberjackHutTile = () => {
     return (
