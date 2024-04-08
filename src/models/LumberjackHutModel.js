@@ -25,18 +25,17 @@ class LumberjackHutModel {
     }
 
     doJob(myWoodModel) {
-        GameState.editEntity(myWoodModel, {remainingResource: myWoodModel.remainingResource - this.productionRate});
-        GameState.addWood(this.productionRate);
-    }
-
-    startWork() {
-
         // if building is not Connected to Base return
         if(!this.isConnected) {
             console.log(this.id + 'is not connected to Base')
             return
         }
 
+        GameState.editEntity(myWoodModel, {remainingResource: myWoodModel.remainingResource - this.productionRate});
+        GameState.addWood(this.productionRate);
+    }
+
+    startWork() {
         const prepareJob = () => {
             if (this.jobQue.length > 0) {
                 let currentJob = this.jobQue[0];

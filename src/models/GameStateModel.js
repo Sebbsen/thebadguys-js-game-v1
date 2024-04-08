@@ -50,12 +50,21 @@ class GameStateModel {
         return this.map;
     }
 
+    checkIfPathRemovedOrAdded(oldTile, newTile) {
+        if (oldTile === 'P' || newTile === 'P') {
+            const baseEntity = this.entities.find(entity => entity.type === 'Base'); //TODO: find a better way to get the base entity (mabye store it on load)
+            baseEntity.setConnectedAttOnEntities();
+        }
+    }
+
     editMap(coords, letter) {
+        //TODO: i think x,y are switched
         const x = coords[0];
         const y = coords[1];
         
-        if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) {
+        if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) { // check if coords are within map
             this.map.mapMatrix[x][y] = letter;
+            this.checkIfPathRemovedOrAdded(this.map.mapMatrix[x][y], letter); 
             this.notifyObservers('mapEdited', this.map);
         }
     }

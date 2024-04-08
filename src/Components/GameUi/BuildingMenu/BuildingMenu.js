@@ -3,8 +3,10 @@ import { MyReactState }  from '../../../state/ReactContext';
 import { BuyBuildingItem } from '../BuyBuildingItem/BuyBuildingItem';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
+import PathModel from '../../../models/PathModel';
 
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
+import PathImg from '../../../assets/4_directions_path.png';
 
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);
@@ -43,6 +45,16 @@ export const BuildingMenu = () => {
         {type: 'testOutput', cost: 2},
       ],
     },
+    {
+      buildingModel: PathModel,
+      type: 'LumberjackHut',
+      name: 'Lumberjack Hut',
+      img: PathImg,
+      tileType: 'P',
+      buildResources: [
+          {type: 'wood', cost: 5},
+      ],
+    },
   ];
 
 
@@ -52,6 +64,7 @@ export const BuildingMenu = () => {
         bottom: '0',
         left: '50%',
         pointerEvents: 'all',
+        display: 'flex',
     }}>
       Buy Buildings:
       {buildingsToBuy.map((building, index)=>{

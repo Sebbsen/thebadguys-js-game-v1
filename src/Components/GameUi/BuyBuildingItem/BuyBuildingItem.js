@@ -18,12 +18,15 @@ export const BuyBuildingItem = ({
     const { tileClickedCoords } = state;
     const { isBuilding } = state;
 
+    const [isSelected, setIsSelected] = useState(false);
+
     const handleBuyBuilding = () => {
         dispatch({ type: 'updateIsBuilding', payload: true });
+        setIsSelected(true);
     };
 
     useEffect(() => {
-        if (isBuilding) {
+        if (isBuilding && isSelected) {
             const currentResources = GameState.getResources();
 
             // Check if the player has enough of each resource
@@ -38,9 +41,13 @@ export const BuyBuildingItem = ({
                 });
 
                 // Proceed with building
-                const newLumberjackHut = new buildingModel({ id: tileClickedCoords });
-                GameState.addEntity(newLumberjackHut);
-                newLumberjackHut.checkForAutoWork();
+                const newBuildingModel = new buildingModel({ id: tileClickedCoords });
+                GameState.addEntity(newBuildingModel);
+                
+                if (newBuildingModel.checkForAutoWork) {
+                    newBuildingModel.checkForAutoWork();
+                }
+                
                 GameState.editMap(tileClickedCoords.split('-'), tileType);
             } else {
                 // Not enough resources alert
@@ -69,7 +76,7 @@ export const BuyBuildingItem = ({
                     height: '50px',
                 }}
             />
-            {isBuilding ? (
+            {isBuilding && isSelected ? (
                 <div>Place {name}</div>
             ) : (
                 <div>
