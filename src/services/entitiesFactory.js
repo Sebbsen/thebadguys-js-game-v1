@@ -5,7 +5,7 @@ export const getEntities = (mapMatrix) => {
     const entities = [];
     mapMatrix.forEach((row, rowIndex) => {
         row.forEach((tile, columnIndex) => {
-            const tileID = `${rowIndex+1}-${columnIndex+1}`;
+            const tileID = `${rowIndex}-${columnIndex}`;
             switch (tile) {
                 case 'W':
                     entities.push(new WoodModel({id: tileID}));

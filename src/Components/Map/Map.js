@@ -49,8 +49,8 @@ export const Map = ({children}) => {
                     <Tile 
                         key={`${rowIndex}-${columnIndex}`}
                         tileType={tile}
-                        id={`${rowIndex+1}-${columnIndex+1}`}
-                        coords={[columnIndex+1,rowIndex+1]}
+                        id={`${rowIndex}-${columnIndex}`}
+                        coords={[columnIndex,rowIndex]}
                     />
                 </div>
             ))
