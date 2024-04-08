@@ -30,6 +30,13 @@ class LumberjackHutModel {
     }
 
     startWork() {
+
+        // if building is not Connected to Base return
+        if(!this.isConnected) {
+            console.log(this.id + 'is not connected to Base')
+            return
+        }
+
         const prepareJob = () => {
             if (this.jobQue.length > 0) {
                 let currentJob = this.jobQue[0];
