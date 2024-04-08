@@ -13,6 +13,7 @@ import TritiumTile from './TritiumTile';
 // Building tiles
 import BaseTile from './BaseTile';
 import LumberjackHutTile from './LumberjackHutTile';
+import PathTile from './PathTile';
 
 const Tile = ({ tileType, id, coords }) => {
     let tileComponent;
@@ -40,6 +41,9 @@ const Tile = ({ tileType, id, coords }) => {
             break;
         case 'L':
             tileComponent = <LumberjackHutTile />;
+            break;
+        case 'P':
+            tileComponent = <PathTile />;
             break;
         default:
             tileComponent = <div>N</div>;
