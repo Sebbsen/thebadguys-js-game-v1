@@ -51,8 +51,8 @@ class GameStateModel {
     }
 
     editMap(coords, letter) {
-        const x = coords[0]-1;
-        const y = coords[1]-1;
+        const x = coords[0];
+        const y = coords[1];
         
         if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) {
             this.map.mapMatrix[x][y] = letter;
