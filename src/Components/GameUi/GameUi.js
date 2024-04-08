@@ -35,6 +35,8 @@ export const GameUi = () => {
         left: '0',
         width: '100%',
         height: '100%',
+        zIndex: 1000,
+        pointerEvents: 'none',
     }}>
       <p>Wood: {wood}</p>
       <button onClick={collectWood}>Collect Wood</button>
