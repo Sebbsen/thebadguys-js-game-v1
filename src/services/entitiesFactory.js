@@ -1,5 +1,7 @@
 import WoodModel from '../models/WoodModel';
 import LumberjackHutModel from '../models/LumberjackHutModel';
+import PathModel from '../models/PathModel';
+import BaseModel from '../models/BaseModel';
 
 export const getEntities = (mapMatrix) => {
     const entities = [];
@@ -12,6 +14,12 @@ export const getEntities = (mapMatrix) => {
                     break;
                 case 'L':
                     entities.push(new LumberjackHutModel({id: tileID}));
+                    break;
+                case 'P':
+                    entities.push(new PathModel({id: tileID}));
+                    break;
+                case 'B':
+                    entities.push(new BaseModel({id: tileID}));
                     break;
                 default:
                     break;
