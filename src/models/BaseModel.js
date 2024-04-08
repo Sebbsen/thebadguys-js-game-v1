@@ -1,10 +1,12 @@
 import GameState from '../state/GameManager';
+import { containsArray } from '../services/utils';
 
 class BaseModel {
-    constructor({id, needsPathTileTypes}) {
+    constructor({id}) {
         this.id = id;
         this.coords = id.split('-');
-        this.needsPathTileTypes = needsPathTileTypes;
+        this.needsPathTileTypes = ['L', 'I']; //TODO: make it smarter
+        this.type = 'Base';
     }
   
     getConnectedEntitiesCoords = () => {
@@ -23,8 +25,8 @@ class BaseModel {
         const checkSurroundingCoords = (currentCoords) => {
             surroundingCordsOffset.forEach((offset) => {
                 const surroundingCord = [];
-                surroundingCord[0] = currentCoords[0] + offset[0];
-                surroundingCord[1] = currentCoords[1] + offset[1];
+                surroundingCord[0] = parseFloat(currentCoords[0]) + parseFloat(offset[0]);
+                surroundingCord[1] = parseFloat(currentCoords[1]) + parseFloat(offset[1]);
                 // return if already checked
                 if (containsArray(alreadyCheckedCoords, surroundingCord)) {
                     return
@@ -45,10 +47,11 @@ class BaseModel {
         return connectedBuildingsCoords;
     }
 
-    setConnectedAttOnEntities = (value) => {
+    setConnectedAttOnEntities = () => {
         const connectedEntitiesCoords = this.getConnectedEntitiesCoords()
-        const connectedEntitiesIds = connectedEntitiesIds.map(coords => `${coords[0]}-${coords[1]}`)
-        needsPathEntities = GameState.getEntities().find(entity => entity.needsPath === true)
+        const connectedEntitiesIds = connectedEntitiesCoords.map(coords => `${coords[0]}-${coords[1]}`)
+        const needsPathEntities = GameState.getEntities().filter(entity => entity.needsPath === true)
+        
         needsPathEntities.forEach(entity => {
             if (connectedEntitiesIds.includes(entity.id)) {
                 GameState.editEntity(entity, {isConnected: true})
