@@ -10,6 +10,8 @@ class LumberjackHutModel {
         this.productionRate = 1 * lvl;
         this.workingRadius = 1;
         this.baseWorkInterval = 1000;
+        this.needsPath = true;
+        this.isConnected = false;
     }
   
     addToQue(myWoodModel) {
