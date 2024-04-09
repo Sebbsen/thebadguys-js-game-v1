@@ -12,7 +12,7 @@ function reducer(state, action) {
   switch (action.type) {
     // Building
     case 'updateTileClickedCoords':
-      return { ...state, tileClickedCoords: action.payload};
+      return { ...state, tileClickedCoords: {coords: action.payload, timestamp: Date.now()}};
     case 'updateIsBuilding':
       return { ...state, isBuilding: action.payload};
     // Alert

@@ -58,14 +58,14 @@ export const BuyBuildingItem = ({
                 });
 
                 // Proceed with building
-                const newBuildingModel = new buildingModel({ id: tileClickedCoords });
+                const newBuildingModel = new buildingModel({ id: tileClickedCoords.coords });
                 GameState.addEntity(newBuildingModel);
                 
                 if (newBuildingModel.checkForAutoWork) {
                     newBuildingModel.checkForAutoWork();
                 }
                 
-                GameState.editMap(tileClickedCoords.split('-'), tileType);
+                GameState.editMap(tileClickedCoords.coords.split('-'), tileType);
             } else {
                 // Not enough resources alert
                 dispatch({ type: 'showAlert', payload: 'Not enough resources' });
@@ -73,8 +73,6 @@ export const BuyBuildingItem = ({
             }
         }
     }, [tileClickedCoords]); 
-    //TODO: fix bug, where building cant place on a tile that clicked, when not enough resources
-    // --> tileClickedCoords is not updated, when clicked on the same tile again
 
     return (
         <div
