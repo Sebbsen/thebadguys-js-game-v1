@@ -33,6 +33,10 @@ class LumberjackHutModel {
 
         GameState.editEntity(myWoodModel, {remainingResource: myWoodModel.remainingResource - this.productionRate});
         GameState.addWood(this.productionRate);
+        if (myWoodModel.remainingResource <= 0) {
+            GameState.editMap(myWoodModel.coords, 'E');
+            GameState.removeEntity(myWoodModel);
+        }
     }
 
     startWork() {
