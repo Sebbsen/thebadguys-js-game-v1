@@ -4,6 +4,7 @@ import { BuyBuildingItem } from '../BuyBuildingItem/BuyBuildingItem';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
 import PathModel from '../../../models/PathModel';
+import SawmillModel from '../../../models/SawmillModel';
 
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
 import PathImg from '../../../assets/4_directions_path.png';
@@ -11,22 +12,6 @@ import PathImg from '../../../assets/4_directions_path.png';
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);
   const { isBuilding } = state;
-
-  // set isBuilding to false when escape key is pressed
-  const handleKeyDown = (event) => {
-    if (event.key === 'Escape' && isBuilding) {
-      dispatch({ type: 'updateIsBuilding', payload: false });
-    }
-  };
-
-  // listen for escape key press
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    // Remove event listener when component unmounts
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isBuilding]);
 
   const buildingsToBuy = [
     {
@@ -38,21 +23,34 @@ export const BuildingMenu = () => {
       buildResources: [
           {type: 'wood', cost: 13},
       ],
-      productionInput: [
-        {type: 'testInput', cost: 1},
-      ],
       productionOutput: [
-        {type: 'testOutput', cost: 2},
+        {type: 'wood', cost: 1},
       ],
     },
     {
       buildingModel: PathModel,
-      type: 'LumberjackHut',
-      name: 'Lumberjack Hut',
+      type: 'Path',
+      name: 'Path',
       img: PathImg,
       tileType: 'P',
       buildResources: [
           {type: 'wood', cost: 5},
+      ],
+    },
+    {
+      buildingModel: SawmillModel,
+      type: 'Sawmill',
+      name: 'Sawmill',
+      img: LumberjackHutImg,
+      tileType: 'S',
+      buildResources: [
+          {type: 'wood', cost: 40},
+      ],
+      productionInput: [
+        {type: 'wood', cost: 1},
+      ],
+      productionOutput: [
+        {type: 'Planks', cost: 1},
       ],
     },
   ];

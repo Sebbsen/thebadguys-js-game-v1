@@ -7,6 +7,7 @@ class GameStateModel {
         };
         this.resources = {
             wood: 10,
+            planks: 0,
             iron: 0
         };
         this.entities = [];
@@ -72,6 +73,10 @@ class GameStateModel {
     // resources
     getResources() {
         return this.resources;
+    }
+
+    getResouce(resource) {
+        return this.resources[resource];
     }
 
     changeResource(resource, value) {

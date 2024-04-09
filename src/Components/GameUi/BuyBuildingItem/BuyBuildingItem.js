@@ -21,12 +21,29 @@ export const BuyBuildingItem = ({
     const [isSelected, setIsSelected] = useState(false);
 
     const handleBuyBuilding = () => {
-        dispatch({ type: 'updateIsBuilding', payload: true });
-        setIsSelected(true);
+        dispatch({ type: 'updateIsBuilding', payload: type });
     };
 
+
+    // set isBuilding to false when escape key is pressed
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape' && isBuilding) {
+            dispatch({ type: 'updateIsBuilding', payload: '' });
+        }
+    };
+
+    // listen for escape key press
     useEffect(() => {
-        if (isBuilding && isSelected) {
+        document.addEventListener('keydown', handleKeyDown);
+        // Remove event listener when component unmounts
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isBuilding]);
+
+
+    useEffect(() => {
+        if (isBuilding === type) {
             const currentResources = GameState.getResources();
 
             // Check if the player has enough of each resource
@@ -76,7 +93,7 @@ export const BuyBuildingItem = ({
                     height: '50px',
                 }}
             />
-            {isBuilding && isSelected ? (
+            {isBuilding === type ? (
                 <div>Place {name}</div>
             ) : (
                 <div>

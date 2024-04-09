@@ -5,7 +5,7 @@ export const MyReactState = createContext();
 const initialState = { 
   alert: { message: '', isVisible: false },
   tileClickedCoords: '',
-  isBuilding: false,
+  isBuilding: '',
 };
 
 function reducer(state, action) {

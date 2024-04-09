@@ -1,5 +1,6 @@
 import WoodModel from '../models/WoodModel';
 import LumberjackHutModel from '../models/LumberjackHutModel';
+import SawmillModel from '../models/SawmillModel';
 import PathModel from '../models/PathModel';
 import BaseModel from '../models/BaseModel';
 
@@ -14,6 +15,9 @@ export const getEntities = (mapMatrix) => {
                     break;
                 case 'L':
                     entities.push(new LumberjackHutModel({id: tileID}));
+                    break;
+                case 'S':
+                    entities.push(new SawmillModel({id: tileID}));
                     break;
                 case 'P':
                     entities.push(new PathModel({id: tileID}));

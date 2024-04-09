@@ -3,28 +3,40 @@ import GameState from '../../../state/GameManager';
 
 export const StatusBar = () => {
 
-    // State to hold the wood value
-    const [wood, setWood] = useState(GameState.getWood());
+    // State to hold the wood and planks values
+    const [wood, setWood] = useState(GameState.getResouce('wood'));
+    const [planks, setPlanks] = useState(GameState.getResouce('planks'));
 
     const collectWood = () => {
-        GameState.addWood(10);
-        console.log('Wood collected', GameState.getWood());
+        GameState.changeResource('wood', 10);
+    };
+
+    const collectPlanks = () => {
+        GameState.changeResource('planks', 10);
     };
 
     useEffect(() => {
         // What to do when the observer is triggered
         const woodObserver = {
             update: () => {
-                setWood(GameState.getWood());
+                setWood(GameState.getResouce('wood'));
             }
         };
 
-        // add observer to GameState
+        const planksObserver = {
+            update: () => {
+                setPlanks(GameState.getResouce('planks'));
+            }
+        };
+
+        // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
+        GameState.addObserver('planksChanged', planksObserver);
 
         // removeObserver if component is unmounted
         return () => {
             GameState.removeObserver('woodChanged', woodObserver);
+            GameState.removeObserver('planksChanged', planksObserver);
         };
     }, []);
 
@@ -34,9 +46,16 @@ export const StatusBar = () => {
             top: '0',
             left: '50%',
             pointerEvents: 'all',
+            display: 'flex',
         }}>
-            <p>Wood: {wood}</p>
-            <button onClick={collectWood}>Collect Wood</button>
+            <div>
+                <p>Wood: {wood}</p>
+                <button onClick={collectWood}>Collect Wood</button>
+            </div>
+            <div>
+                <p>Planks: {planks}</p>
+                <button onClick={collectPlanks}>Collect Planks</button>
+            </div>
         </div>
     );
 };
