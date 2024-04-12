@@ -8,7 +8,8 @@ class GameStateModel {
         this.resources = {
             wood: 10,
             planks: 0,
-            iron: 0
+            iron: 0,
+            gold: 0
         };
         this.entities = [];
         this.observers = new Map();
@@ -147,9 +148,7 @@ class GameStateModel {
     editEntity(entity, propName, value) {
         const index = this.entities.indexOf(entity);
         if (index !== -1) {
-            console.log('before editEntity', this.entities[index]);
             this.entities[index][propName] = value;
-            console.log('after editEntity', this.entities[index]);
             this.notifyObservers(`entityEdited${this.entities[index].id}`, this.entities[index]);
         }
     }
