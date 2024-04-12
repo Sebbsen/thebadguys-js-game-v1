@@ -3,6 +3,7 @@ import { MyReactState }  from '../../../state/ReactContext';
 import { BuyBuildingItem } from '../BuyBuildingItem/BuyBuildingItem';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
+import IronMinercampModel from '../../../models/IronMinercampModel';
 import PathModel from '../../../models/PathModel';
 import SawmillModel from '../../../models/SawmillModel';
 
@@ -15,6 +16,16 @@ export const BuildingMenu = () => {
 
   const buildingsToBuy = [
     {
+      buildingModel: PathModel,
+      type: 'Path',
+      name: 'Path',
+      img: PathImg,
+      tileType: 'P',
+      buildResources: [
+          {type: 'wood', cost: 5},
+      ],
+    },
+    {
       buildingModel: LumberjackHutModel,
       type: 'LumberjackHut',
       name: 'Lumberjack Hut',
@@ -25,16 +36,6 @@ export const BuildingMenu = () => {
       ],
       productionOutput: [
         {type: 'wood', cost: 1},
-      ],
-    },
-    {
-      buildingModel: PathModel,
-      type: 'Path',
-      name: 'Path',
-      img: PathImg,
-      tileType: 'P',
-      buildResources: [
-          {type: 'wood', cost: 5},
       ],
     },
     {
@@ -51,6 +52,20 @@ export const BuildingMenu = () => {
       ],
       productionOutput: [
         {type: 'Planks', cost: 1},
+      ],
+    },
+    {
+      buildingModel: IronMinercampModel,
+      type: 'IronMinercamp',
+      name: 'Iron Minercamp',
+      img: LumberjackHutImg,
+      tileType: 'IM',
+      buildResources: [
+          {type: 'wood', cost: 5},
+          {type: 'planks', cost: 50},
+      ],
+      productionOutput: [
+        {type: 'iron', cost: 1},
       ],
     },
   ];

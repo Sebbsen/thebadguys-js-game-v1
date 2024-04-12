@@ -13,6 +13,7 @@ import GoldTile from './GoldTile';
 // Building tiles
 import BaseTile from './BaseTile';
 import LumberjackHutTile from './LumberjackHutTile';
+import IronMinercampTile from './IronMinercampTile';
 import SawmillTile from './SawmillTile';
 import PathTile from './PathTile';
 
@@ -31,9 +32,9 @@ const Tile = ({ tileType, id, coords }) => {
             tileComponent = <WoodTile id={id} coords={coords} />;
             break;
         case 'I':
-            tileComponent = <IronTile />;
+            tileComponent = <IronTile id={id} coords={coords} />;
             break;
-        case 'T':
+        case 'G':
             tileComponent = <GoldTile />;
             break;
         // Building tiles
@@ -42,6 +43,9 @@ const Tile = ({ tileType, id, coords }) => {
             break;
         case 'L':
             tileComponent = <LumberjackHutTile id={id} coords={coords} />;
+            break;
+        case 'IM':
+            tileComponent = <IronMinercampTile id={id} coords={coords} />;
             break;
         case 'S':
             tileComponent = <SawmillTile/>;

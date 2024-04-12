@@ -6,6 +6,7 @@ export const StatusBar = () => {
     // State to hold the wood and planks values
     const [wood, setWood] = useState(GameState.getResouce('wood'));
     const [planks, setPlanks] = useState(GameState.getResouce('planks'));
+    const [iron, setIron] = useState(GameState.getResouce('iron'));
 
     const collectWood = () => {
         GameState.changeResource('wood', 10);
@@ -13,6 +14,10 @@ export const StatusBar = () => {
 
     const collectPlanks = () => {
         GameState.changeResource('planks', 10);
+    };
+
+    const collectIron = () => {
+        GameState.changeResource('iron', 10);
     };
 
     useEffect(() => {
@@ -29,14 +34,22 @@ export const StatusBar = () => {
             }
         };
 
+        const ironObserver = {
+            update: () => {
+                setIron(GameState.getResouce('iron'));
+            }
+        };
+
         // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
         GameState.addObserver('planksChanged', planksObserver);
+        GameState.addObserver('ironChanged', ironObserver);
 
         // removeObserver if component is unmounted
         return () => {
             GameState.removeObserver('woodChanged', woodObserver);
             GameState.removeObserver('planksChanged', planksObserver);
+            GameState.removeObserver('ironChanged', ironObserver);
         };
     }, []);
 
@@ -55,6 +68,10 @@ export const StatusBar = () => {
             <div>
                 <p>Planks: {planks}</p>
                 <button onClick={collectPlanks}>Collect Planks</button>
+            </div>
+            <div>
+                <p>Iron: {iron}</p>
+                <button onClick={collectIron}>Collect Iron</button>
             </div>
         </div>
     );

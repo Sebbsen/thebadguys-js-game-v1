@@ -5,7 +5,7 @@ class BaseModel {
     constructor({id}) {
         this.id = id;
         this.coords = id.split('-');
-        this.needsPathTileTypes = ['L', 'I']; //TODO: make it smarter
+        this.needsPathTileTypes = ['L', 'IM']; //TODO: make it smarter
         this.type = 'Base';
     }
   
