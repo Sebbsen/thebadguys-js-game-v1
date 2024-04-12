@@ -5,7 +5,7 @@ class LumberjackHutModel {
     constructor({ id, lvl = 1 }) {
         this.id = id;
         this.coords = id.split('-');
-        this.jobQue = [];
+        this.jobQueue = [];
         this.lvl = lvl;
         this.productionRate = 1 * lvl;
         this.workingRadius = 1;
@@ -14,11 +14,11 @@ class LumberjackHutModel {
         this.isConnected = false;
     }
 
-    addToQue(myWoodModel) {
+    addToQueue(myWoodModel) {
         if (myWoodModel instanceof WoodModel) {
-            this.jobQue.push(myWoodModel);
+            this.jobQueue.push(myWoodModel);
             // start Work if not already started
-            if (this.jobQue.length === 1) {
+            if (this.jobQueue.length === 1) {
                 this.startWork();
             }
         }
@@ -41,8 +41,8 @@ class LumberjackHutModel {
 
     startWork() {
         const prepareJob = () => {
-            if (this.jobQue.length > 0) {
-                let currentJob = this.jobQue[0];
+            if (this.jobQueue.length > 0) {
+                let currentJob = this.jobQueue[0];
                 // Recalculate the distance each time
                 let jobDistance = Math.max(Math.abs(this.coords[0] - currentJob.coords[0]), Math.abs(this.coords[1] - currentJob.coords[1]));
 
@@ -50,7 +50,7 @@ class LumberjackHutModel {
                 setTimeout(() => {
                     // Make sure the job is still relevant.
                     if (currentJob.remainingResource <= 0) {
-                        this.jobQue.shift(); // Remove the job when it is completed.
+                        this.jobQueue.shift(); // Remove the job when it is completed.
                     } else {
                         this.doJob(currentJob);
                     }
@@ -66,7 +66,7 @@ class LumberjackHutModel {
     checkForAutoWork() {
         setInterval(() => {
             const entities = GameState.getEntities();
-            if (this.jobQue.length <= 0) {
+            if (this.jobQueue.length <= 0) {
                 const entity = entities.find(entity => {
                     if (entity instanceof WoodModel) {
                         let distance = Math.max(Math.abs(this.coords[0] - entity.coords[0]), Math.abs(this.coords[1] - entity.coords[1]));
@@ -76,7 +76,7 @@ class LumberjackHutModel {
                 });
 
                 if (entity) {
-                    this.addToQue(entity);
+                    this.addToQueue(entity);
                 }
             }
         }, 1000);

@@ -26,8 +26,8 @@ const MinercampTile = ({ id, coords }) => {
         if (isSelected && tileClickedCoords.coords != coords.reverse().join('-')) {
             const currentMinercampEntity = GameState.getEntityById(id)
             const currentEntity = GameState.getEntityById(tileClickedCoords.coords);
-            if (currentEntity.type === 'Iron' || currentEntity.type === 'Gold') {
-                currentMinercampEntity.addToQue(currentEntity);
+            if (currentEntity.type === 'iron' || currentEntity.type === 'gold') {
+                currentMinercampEntity.addToQueue(currentEntity);
             }
         }
     }, [tileClickedCoords]);

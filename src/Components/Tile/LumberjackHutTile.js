@@ -26,8 +26,8 @@ const LumberjackHutTile = ({ id, coords }) => {
         if (isSelected && tileClickedCoords.coords != coords.reverse().join('-')) {
             const currentLumberjackHutEntity = GameState.getEntityById(id)
             const woodEntity = GameState.getEntityById(tileClickedCoords.coords);
-            if(woodEntity.type === 'Wood') {
-                currentLumberjackHutEntity.addToQue(woodEntity);
+            if(woodEntity?.type === 'wood') {
+                currentLumberjackHutEntity.addToQueue(woodEntity);
             }
         }
     }, [tileClickedCoords]);
