@@ -3,7 +3,7 @@ import { MyReactState }  from '../../../state/ReactContext';
 import { BuyBuildingItem } from '../BuyBuildingItem/BuyBuildingItem';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
-import IronMinercampModel from '../../../models/IronMinercampModel';
+import MinercampModel from '../../../models/MinercampModel';
 import PathModel from '../../../models/PathModel';
 import SawmillModel from '../../../models/SawmillModel';
 
@@ -55,9 +55,9 @@ export const BuildingMenu = () => {
       ],
     },
     {
-      buildingModel: IronMinercampModel,
-      type: 'IronMinercamp',
-      name: 'Iron Minercamp',
+      buildingModel: MinercampModel,
+      type: 'Minercamp',
+      name: 'Minercamp',
       img: LumberjackHutImg,
       tileType: 'IM',
       buildResources: [

@@ -3,7 +3,7 @@ import GameState from '../../state/GameManager';
 import MainTileAsset from '../../assets/lumberjack_hut_building.png';
 import { MyReactState } from '../../state/ReactContext';
 
-const IronMinercampTile = ({ id, coords }) => {
+const MinercampTile = ({ id, coords }) => {
     const { dispatch, state } = useContext(MyReactState);
     const { tileClickedCoords } = state;
     const [isSelected, setIsSelected] = useState(false);
@@ -24,10 +24,10 @@ const IronMinercampTile = ({ id, coords }) => {
 
     useEffect(() => {
         if (isSelected && tileClickedCoords.coords != coords.reverse().join('-')) {
-            const currentIronMinercampEntity = GameState.getEntityById(id)
+            const currentMinercampEntity = GameState.getEntityById(id)
             const ironEntity = GameState.getEntityById(tileClickedCoords.coords);
             if (ironEntity.type === 'Iron') {
-                currentIronMinercampEntity.addToQue(ironEntity);
+                currentMinercampEntity.addToQue(ironEntity);
             }
         }
     }, [tileClickedCoords]);
@@ -89,4 +89,4 @@ const IronMinercampTile = ({ id, coords }) => {
     );
 };
 
-export default IronMinercampTile;
+export default MinercampTile;

@@ -4,7 +4,7 @@ import WoodModel from '../models/WoodModel';
 import IronModel from '../models/IronModel';
 // Building tiles
 import LumberjackHutModel from '../models/LumberjackHutModel';
-import IronMinercampModel from '../models/IronMinercampModel';
+import MinercampModel from '../models/MinercampModel';
 import SawmillModel from '../models/SawmillModel';
 import PathModel from '../models/PathModel';
 import BaseModel from '../models/BaseModel';
@@ -31,7 +31,7 @@ export const getEntities = (mapMatrix) => {
                     entities.push(new SawmillModel({id: tileID}));
                     break;
                 case 'IM':
-                    entities.push(new IronMinercampModel({id: tileID}));
+                    entities.push(new MinercampModel({id: tileID}));
                     break;
                 case 'P':
                     entities.push(new PathModel({id: tileID}));

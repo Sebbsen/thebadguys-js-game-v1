@@ -1,7 +1,7 @@
 import IronModel from './IronModel';
 import GameState from '../state/GameManager';
 
-class IronMinercampModel {
+class MinercampModel {
     constructor({ id, lvl = 1 }) {
         this.id = id;
         this.coords = id.split('-');
@@ -88,4 +88,4 @@ class IronMinercampModel {
 
 }
 
-export default IronMinercampModel;
+export default MinercampModel;
