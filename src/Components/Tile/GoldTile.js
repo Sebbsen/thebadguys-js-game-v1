@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import GameState from '../../state/GameManager';
 
-const GoldTile = () => {
+const GoldTile = ({id, coords}) => {
+    const [entitiy, setEntity] = useState(GameState.getEntityById(id));
+    
+
+    useEffect(() => {
+        // What to do when the observer is triggered
+        const entityObserver = {
+            update: () => {
+                setEntity(prevEntity => ({ ...prevEntity, ...GameState.getEntityById(id)}));
+            }
+        };
+
+        
+        // add observer to GameState
+        GameState.addObserver(`entityEdited${entitiy.id}`, entityObserver);
+
+        // removeObserver if component is unmounted
+        return () => {
+        GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
+        };
+    }, [id, entitiy?.id]);
+
     return (
         <div
         style={{
@@ -31,6 +53,21 @@ const GoldTile = () => {
                     transform: "rotateZ(-45deg) rotateX(-55deg) scale(0.5, 1.5)"
                 }} 
             />
+            <div style={
+                    {
+                        position: "absolute",
+                        zIndex: 2,
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "0.5rem",
+                    }
+                
+                }>
+                    {entitiy?.remainingResource || "E"}
+                </div>
         </div>
     );
 };

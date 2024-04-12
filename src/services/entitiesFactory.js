@@ -2,6 +2,7 @@
 // Ressource tiles
 import WoodModel from '../models/WoodModel';
 import IronModel from '../models/IronModel';
+import GoldModel from '../models/GoldModel';
 // Building tiles
 import LumberjackHutModel from '../models/LumberjackHutModel';
 import MinercampModel from '../models/MinercampModel';
@@ -22,6 +23,9 @@ export const getEntities = (mapMatrix) => {
                     break;
                 case 'I':
                     entities.push(new IronModel({id: tileID}));
+                    break;
+                case 'G':
+                    entities.push(new GoldModel({id: tileID}));
                     break;
                 // Building tiles
                 case 'L':

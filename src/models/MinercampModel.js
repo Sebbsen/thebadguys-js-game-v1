@@ -1,4 +1,5 @@
 import IronModel from './IronModel';
+import GoldModel from './GoldModel';
 import GameState from '../state/GameManager';
 
 class MinercampModel {
@@ -14,9 +15,9 @@ class MinercampModel {
         this.isConnected = false;
     }
 
-    addToQue(myIronModel) {
-        if (myIronModel instanceof IronModel) {
-            this.jobQue.push(myIronModel);
+    addToQue(myResourceModel) {
+        if (myResourceModel instanceof IronModel || myResourceModel instanceof GoldModel) {
+            this.jobQue.push(myResourceModel);
             // start Work if not already started
             if (this.jobQue.length === 1) {
                 this.startWork();
@@ -24,18 +25,18 @@ class MinercampModel {
         }
     }
 
-    doJob(myIronModel) {
+    doJob(myResourceModel) {
         // if building is not Connected to Base return
         if (!this.isConnected) {
             console.log(this.id + 'is not connected to Base')
             return
         }
-
-        GameState.editEntity(myIronModel, 'remainingResource', myIronModel.remainingResource - this.productionRate);
-        GameState.changeResource('iron', this.productionRate);
-        if (myIronModel.remainingResource <= 0) {
-            GameState.editMap(myIronModel.coords, 'E');
-            GameState.removeEntity(myIronModel);
+        
+        GameState.editEntity(myResourceModel, 'remainingResource', myResourceModel.remainingResource - this.productionRate);
+        GameState.changeResource(myResourceModel.type, this.productionRate);
+        if (myResourceModel.remainingResource <= 0) {
+            GameState.editMap(myResourceModel.coords, 'E');
+            GameState.removeEntity(myResourceModel);
         }
     }
 
@@ -68,7 +69,7 @@ class MinercampModel {
             const entities = GameState.getEntities();
             if (this.jobQue.length <= 0) {
                 const entity = entities.find(entity => {
-                    if (entity instanceof IronModel) {
+                    if (entity instanceof IronModel || entity instanceof GoldModel) {
                         let distance = Math.max(Math.abs(this.coords[0] - entity.coords[0]), Math.abs(this.coords[1] - entity.coords[1]));
                         return distance <= this.workingRadius;
                     }

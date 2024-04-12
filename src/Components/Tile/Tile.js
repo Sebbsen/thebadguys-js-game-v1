@@ -35,7 +35,7 @@ const Tile = ({ tileType, id, coords }) => {
             tileComponent = <IronTile id={id} coords={coords} />;
             break;
         case 'G':
-            tileComponent = <GoldTile />;
+            tileComponent = <GoldTile id={id} coords={coords} />;
             break;
         // Building tiles
         case 'B':

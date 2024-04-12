@@ -3,10 +3,11 @@ import GameState from '../../../state/GameManager';
 
 export const StatusBar = () => {
 
-    // State to hold the wood and planks values
+    // State to hold the wood, planks, iron and gold values
     const [wood, setWood] = useState(GameState.getResouce('wood'));
     const [planks, setPlanks] = useState(GameState.getResouce('planks'));
     const [iron, setIron] = useState(GameState.getResouce('iron'));
+    const [gold, setGold] = useState(GameState.getResouce('gold'));
 
     const collectWood = () => {
         GameState.changeResource('wood', 10);
@@ -18,6 +19,10 @@ export const StatusBar = () => {
 
     const collectIron = () => {
         GameState.changeResource('iron', 10);
+    };
+
+    const collectGold = () => {
+        GameState.changeResource('gold', 10);
     };
 
     useEffect(() => {
@@ -40,16 +45,24 @@ export const StatusBar = () => {
             }
         };
 
+        const goldObserver = {
+            update: () => {
+                setGold(GameState.getResouce('gold'));
+            }
+        };
+
         // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
         GameState.addObserver('planksChanged', planksObserver);
         GameState.addObserver('ironChanged', ironObserver);
+        GameState.addObserver('goldChanged', goldObserver);
 
         // removeObserver if component is unmounted
         return () => {
             GameState.removeObserver('woodChanged', woodObserver);
             GameState.removeObserver('planksChanged', planksObserver);
             GameState.removeObserver('ironChanged', ironObserver);
+            GameState.removeObserver('goldChanged', goldObserver);
         };
     }, []);
 
@@ -72,6 +85,10 @@ export const StatusBar = () => {
             <div>
                 <p>Iron: {iron}</p>
                 <button onClick={collectIron}>Collect Iron</button>
+            </div>
+            <div>
+                <p>Gold: {gold}</p>
+                <button onClick={collectGold}>Collect Gold</button>
             </div>
         </div>
     );
