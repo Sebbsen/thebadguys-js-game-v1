@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TritiumTile = () => {
+const GoldTile = () => {
     return (
         <div
         style={{
@@ -35,4 +35,4 @@ const TritiumTile = () => {
     );
 };
 
-export default TritiumTile;
+export default GoldTile;

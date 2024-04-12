@@ -9,7 +9,7 @@ import WaterTile from './WaterTile';
 // Ressource tiles
 import WoodTile from './WoodTile';
 import IronTile from './IronTile';
-import TritiumTile from './TritiumTile';
+import GoldTile from './GoldTile';
 // Building tiles
 import BaseTile from './BaseTile';
 import LumberjackHutTile from './LumberjackHutTile';
@@ -34,7 +34,7 @@ const Tile = ({ tileType, id, coords }) => {
             tileComponent = <IronTile />;
             break;
         case 'T':
-            tileComponent = <TritiumTile />;
+            tileComponent = <GoldTile />;
             break;
         // Building tiles
         case 'B':
