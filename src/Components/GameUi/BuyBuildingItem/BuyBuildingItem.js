@@ -97,6 +97,12 @@ export const BuyBuildingItem = ({
                 <div>
                     <div>{name}</div>
                     <div>
+                        Costs: 
+                        {buildResources.map((resource, index) => (
+                            <div key={index}>{resource.type}: {resource.cost}</div>
+                        ))}
+                    </div>
+                    <div>
                         Input: 
                         {productionInput.map((input, index) => (
                             <div key={index}>{input.type}: {input.cost}</div>
