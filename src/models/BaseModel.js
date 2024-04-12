@@ -6,7 +6,7 @@ class BaseModel {
         this.id = id;
         this.coords = id.split('-');
         this.needsPathTileTypes = ['L', 'IM']; //TODO: make it smarter
-        this.type = 'Base';
+        this.type = 'base';
     }
   
     getConnectedEntitiesCoords = () => {

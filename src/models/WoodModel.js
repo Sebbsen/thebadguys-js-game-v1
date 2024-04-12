@@ -4,7 +4,7 @@ class WoodModel {
         this.coords = id.split('-');
         this.totalResource = totalResource;
         this.remainingResource = remainingResource;
-        this.type = 'Wood';
+        this.type = 'wood';
     }
   
     updateResource(amount) {

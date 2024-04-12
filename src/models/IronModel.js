@@ -4,7 +4,7 @@ class IronModel {
         this.coords = id.split('-');
         this.totalResource = totalResource;
         this.remainingResource = remainingResource;
-        this.type = 'Iron';
+        this.type = 'iron';
     }
   
     updateResource(amount) {

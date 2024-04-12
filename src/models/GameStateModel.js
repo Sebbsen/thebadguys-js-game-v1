@@ -53,7 +53,7 @@ class GameStateModel {
 
     checkIfPathRemovedOrAdded(oldTile, newTile) {
         if (oldTile === 'P' || newTile === 'P') {
-            const baseEntity = this.entities.find(entity => entity.type === 'Base'); //TODO: find a better way to get the base entity (mabye store it on load)
+            const baseEntity = this.entities.find(entity => entity.type === 'base'); //TODO: find a better way to get the base entity (mabye store it on load)
             baseEntity.setConnectedAttOnEntities();
         }
     }

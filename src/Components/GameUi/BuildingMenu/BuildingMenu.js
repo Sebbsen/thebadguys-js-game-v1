@@ -17,7 +17,7 @@ export const BuildingMenu = () => {
   const buildingsToBuy = [
     {
       buildingModel: PathModel,
-      type: 'Path',
+      type: 'path',
       name: 'Path',
       img: PathImg,
       tileType: 'P',
@@ -27,7 +27,7 @@ export const BuildingMenu = () => {
     },
     {
       buildingModel: LumberjackHutModel,
-      type: 'LumberjackHut',
+      type: 'lumberjackhut',
       name: 'Lumberjack Hut',
       img: LumberjackHutImg,
       tileType: 'L',
@@ -40,7 +40,7 @@ export const BuildingMenu = () => {
     },
     {
       buildingModel: SawmillModel,
-      type: 'Sawmill',
+      type: 'sawmill',
       name: 'Sawmill',
       img: LumberjackHutImg,
       tileType: 'S',
@@ -56,7 +56,7 @@ export const BuildingMenu = () => {
     },
     {
       buildingModel: MinercampModel,
-      type: 'Minercamp',
+      type: 'minercamp',
       name: 'Minercamp',
       img: LumberjackHutImg,
       tileType: 'IM',
