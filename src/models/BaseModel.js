@@ -54,9 +54,9 @@ class BaseModel {
         
         needsPathEntities.forEach(entity => {
             if (connectedEntitiesIds.includes(entity.id)) {
-                GameState.editEntity(entity, {isConnected: true})
+                GameState.editEntity(entity, 'isConnected', true)
             } else {
-                GameState.editEntity(entity, {isConnected: false})
+                GameState.editEntity(entity, 'isConnected', false)
             }
         })
     }

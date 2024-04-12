@@ -144,10 +144,12 @@ class GameStateModel {
         }
     }
 
-    editEntity(entity, newProperties) {
+    editEntity(entity, propName, value) {
         const index = this.entities.indexOf(entity);
         if (index !== -1) {
-            Object.assign(this.entities[index], newProperties);
+            console.log('before editEntity', this.entities[index]);
+            this.entities[index][propName] = value;
+            console.log('after editEntity', this.entities[index]);
             this.notifyObservers(`entityEdited${this.entities[index].id}`, this.entities[index]);
         }
     }

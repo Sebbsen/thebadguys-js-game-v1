@@ -2,7 +2,7 @@ import WoodModel from './WoodModel';
 import GameState from '../state/GameManager';
 
 class LumberjackHutModel {
-    constructor({id, lvl = 1}) {
+    constructor({ id, lvl = 1 }) {
         this.id = id;
         this.coords = id.split('-');
         this.jobQue = [];
@@ -13,7 +13,7 @@ class LumberjackHutModel {
         this.needsPath = true;
         this.isConnected = false;
     }
-  
+
     addToQue(myWoodModel) {
         if (myWoodModel instanceof WoodModel) {
             this.jobQue.push(myWoodModel);
@@ -26,12 +26,12 @@ class LumberjackHutModel {
 
     doJob(myWoodModel) {
         // if building is not Connected to Base return
-        if(!this.isConnected) {
+        if (!this.isConnected) {
             console.log(this.id + 'is not connected to Base')
             return
         }
 
-        GameState.editEntity(myWoodModel, {remainingResource: myWoodModel.remainingResource - this.productionRate});
+        GameState.editEntity(myWoodModel, 'remainingResource', myWoodModel.remainingResource - this.productionRate);
         GameState.addWood(this.productionRate);
         if (myWoodModel.remainingResource <= 0) {
             GameState.editMap(myWoodModel.coords, 'E');
@@ -45,7 +45,7 @@ class LumberjackHutModel {
                 let currentJob = this.jobQue[0];
                 // Recalculate the distance each time
                 let jobDistance = Math.max(Math.abs(this.coords[0] - currentJob.coords[0]), Math.abs(this.coords[1] - currentJob.coords[1]));
-    
+
                 // Wait based on the distance, then execute the job.
                 setTimeout(() => {
                     // Make sure the job is still relevant.
@@ -54,12 +54,12 @@ class LumberjackHutModel {
                     } else {
                         this.doJob(currentJob);
                     }
-                    
+
                     prepareJob(); // Prepare the next job.
                 }, this.baseWorkInterval * ((jobDistance + 1) / (this.lvl + 1))); // the higher the level the faster / the higher the distance the slower
             }
         };
-    
+
         prepareJob(); // Init preparation
     }
 
@@ -67,26 +67,25 @@ class LumberjackHutModel {
         setInterval(() => {
             const entities = GameState.getEntities();
             if (this.jobQue.length <= 0) {
-               
-                entities.forEach(entity => {
+                const entity = entities.find(entity => {
                     if (entity instanceof WoodModel) {
                         let distance = Math.max(Math.abs(this.coords[0] - entity.coords[0]), Math.abs(this.coords[1] - entity.coords[1]));
-                        
-                        if (distance <= this.workingRadius) {
-                            this.addToQue(entity);
-                        }
+                        return distance <= this.workingRadius;
                     }
+                    return false;
                 });
+
+                if (entity) {
+                    this.addToQue(entity);
+                }
             }
         }, 1000);
-        
     }
-    
-    
 
-    
+
+
+
 
 }
-  
+
 export default LumberjackHutModel;
-  

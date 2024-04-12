@@ -41,7 +41,7 @@ const Tile = ({ tileType, id, coords }) => {
             tileComponent = <BaseTile />;
             break;
         case 'L':
-            tileComponent = <LumberjackHutTile />;
+            tileComponent = <LumberjackHutTile id={id} coords={coords} />;
             break;
         case 'S':
             tileComponent = <SawmillTile/>;
