@@ -9,7 +9,8 @@ class GameStateModel {
             wood: 10,
             planks: 0,
             iron: 0,
-            gold: 0
+            gold: 0,
+            ironIngots: 12  
         };
         this.entities = [];
         this.observers = new Map();

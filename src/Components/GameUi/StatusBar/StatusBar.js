@@ -3,11 +3,12 @@ import GameState from '../../../state/GameManager';
 
 export const StatusBar = () => {
 
-    // State to hold the wood, planks, iron and gold values
+    // State to hold the wood, planks, iron, gold and ironIngots values
     const [wood, setWood] = useState(GameState.getResouce('wood'));
     const [planks, setPlanks] = useState(GameState.getResouce('planks'));
     const [iron, setIron] = useState(GameState.getResouce('iron'));
     const [gold, setGold] = useState(GameState.getResouce('gold'));
+    const [ironIngots, setIronIngots] = useState(GameState.getResouce('ironIngots'));
 
     const collectWood = () => {
         GameState.changeResource('wood', 10);
@@ -23,6 +24,10 @@ export const StatusBar = () => {
 
     const collectGold = () => {
         GameState.changeResource('gold', 10);
+    };
+
+    const collectIronIngots = () => {
+        GameState.changeResource('ironIngots', 10);
     };
 
     useEffect(() => {
@@ -51,11 +56,18 @@ export const StatusBar = () => {
             }
         };
 
+        const ironIngotsObserver = {
+            update: () => {
+                setIronIngots(GameState.getResouce('ironIngots'));
+            }
+        };
+
         // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
         GameState.addObserver('planksChanged', planksObserver);
         GameState.addObserver('ironChanged', ironObserver);
         GameState.addObserver('goldChanged', goldObserver);
+        GameState.addObserver('ironIngotsChanged', ironIngotsObserver);
 
         // removeObserver if component is unmounted
         return () => {
@@ -63,6 +75,7 @@ export const StatusBar = () => {
             GameState.removeObserver('planksChanged', planksObserver);
             GameState.removeObserver('ironChanged', ironObserver);
             GameState.removeObserver('goldChanged', goldObserver);
+            GameState.removeObserver('ironIngotsChanged', ironIngotsObserver);
         };
     }, []);
 
@@ -89,6 +102,10 @@ export const StatusBar = () => {
             <div>
                 <p>Gold: {gold}</p>
                 <button onClick={collectGold}>Collect Gold</button>
+            </div>
+            <div>
+                <p>Iron Ingots: {ironIngots}</p>
+                <button onClick={collectIronIngots}>Collect Iron Ingots</button>
             </div>
         </div>
     );
