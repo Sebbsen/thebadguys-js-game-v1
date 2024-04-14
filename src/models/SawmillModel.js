@@ -14,6 +14,9 @@ class SawmillModel {
 
     checkForAutoWork() {
         setInterval(() => {
+            if (this.isConnected === false) {
+                return;
+            }
             const resources = GameState.getResources();
             const wood = resources['wood'];
             if (wood >= 1) {
