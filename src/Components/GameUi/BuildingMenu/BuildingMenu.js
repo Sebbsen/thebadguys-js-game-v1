@@ -11,6 +11,7 @@ import GoldSmelterModel from '../../../models/GoldSmelterModel';
 
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
 import PathImg from '../../../assets/4_directions_path.png';
+import CompassFactoryModel from '../../../models/CompassFactoryModel';
 
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);
@@ -104,6 +105,24 @@ export const BuildingMenu = () => {
       ],
       productionOutput: [
         {type: 'goldIngots', cost: 1},
+      ],
+    },
+    {
+      buildingModel: CompassFactoryModel,
+      type: 'compassfactory',
+      name: 'Compass Factory',
+      img: LumberjackHutImg,
+      tileType: 'CF',
+      buildResources: [
+          {type: 'planks', cost: 300},
+          {type: 'ironIngots', cost: 100},
+      ],
+      productionInput: [
+        {type: 'iron', cost: 4},
+        {type: 'gold', cost: 2},
+      ],
+      productionOutput: [
+        {type: 'compasses', cost: 1},
       ],
     },
   ];

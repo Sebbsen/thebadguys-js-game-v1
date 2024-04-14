@@ -11,7 +11,8 @@ class GameStateModel {
             iron: 0,
             gold: 0,
             ironIngots: 12,
-            goldIngots: 0  
+            goldIngots: 0,
+            compasses: 0,
         };
         this.entities = [];
         this.observers = new Map();

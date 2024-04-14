@@ -3,13 +3,14 @@ import GameState from '../../../state/GameManager';
 
 export const StatusBar = () => {
 
-    // State to hold the wood, planks, iron, gold, ironIngots and goldIngots values
+    // State to hold the wood, planks, iron, gold, ironIngots, goldIngots and compasses values
     const [wood, setWood] = useState(GameState.getResouce('wood'));
     const [planks, setPlanks] = useState(GameState.getResouce('planks'));
     const [iron, setIron] = useState(GameState.getResouce('iron'));
     const [gold, setGold] = useState(GameState.getResouce('gold'));
     const [ironIngots, setIronIngots] = useState(GameState.getResouce('ironIngots'));
     const [goldIngots, setGoldIngots] = useState(GameState.getResouce('goldIngots'));
+    const [compasses, setCompasses] = useState(GameState.getResouce('compasses'));
 
     const collectWood = () => {
         GameState.changeResource('wood', 50);
@@ -33,6 +34,10 @@ export const StatusBar = () => {
 
     const collectGoldIngots = () => {
         GameState.changeResource('goldIngots', 50);
+    };
+
+    const collectCompasses = () => {
+        GameState.changeResource('compasses', 50);
     };
 
     useEffect(() => {
@@ -73,6 +78,12 @@ export const StatusBar = () => {
             }
         };
 
+        const compassesObserver = {
+            update: () => {
+                setCompasses(GameState.getResouce('compasses'));
+            }
+        };
+
         // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
         GameState.addObserver('planksChanged', planksObserver);
@@ -80,6 +91,7 @@ export const StatusBar = () => {
         GameState.addObserver('goldChanged', goldObserver);
         GameState.addObserver('ironIngotsChanged', ironIngotsObserver);
         GameState.addObserver('goldIngotsChanged', goldIngotsObserver);
+        GameState.addObserver('compassesChanged', compassesObserver);
 
         // removeObserver if component is unmounted
         return () => {
@@ -89,6 +101,7 @@ export const StatusBar = () => {
             GameState.removeObserver('goldChanged', goldObserver);
             GameState.removeObserver('ironIngotsChanged', ironIngotsObserver);
             GameState.removeObserver('goldIngotsChanged', goldIngotsObserver);
+            GameState.removeObserver('compassesChanged', compassesObserver);
         };
     }, []);
 
@@ -122,6 +135,10 @@ export const StatusBar = () => {
             <div>
                 <p>Gold Ingots: {goldIngots}</p>
                 <button onClick={collectGoldIngots}>Collect Gold Ingots</button>
+            </div>
+            <div>
+                <p>Compasses: {compasses}</p>
+                <button onClick={collectCompasses}>Collect Compasses</button>
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ import IronSmelterModel from '../models/IronSmelterModel';
 import GoldSmelterModel from '../models/GoldSmelterModel';
 import PathModel from '../models/PathModel';
 import BaseModel from '../models/BaseModel';
+import CompassFactoryModel from '../models/CompassFactoryModel';
 
 export const getEntities = (mapMatrix) => {
     const entities = [];
@@ -50,6 +51,9 @@ export const getEntities = (mapMatrix) => {
                     break;
                 case 'B':
                     entities.push(new BaseModel({id: tileID}));
+                    break;
+                case 'CF':
+                    entities.push(new CompassFactoryModel({id: tileID}));
                     break;
                 default:
                     break;

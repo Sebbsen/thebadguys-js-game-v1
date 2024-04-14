@@ -18,6 +18,7 @@ import IronSmelterTile from './IronSmelterTile';
 import GoldSmelterTile from './GoldSmelterTile';
 import SawmillTile from './SawmillTile';
 import PathTile from './PathTile';
+import CompassFactoryTile from './CompassFactoryTile';
 
 const Tile = ({ tileType, id, coords }) => {
     let tileComponent;
@@ -60,6 +61,9 @@ const Tile = ({ tileType, id, coords }) => {
             break;
         case 'P':
             tileComponent = <PathTile />;
+            break;
+        case 'CF':
+            tileComponent = <CompassFactoryTile />;
             break;
         default:
             tileComponent = <div>N</div>;
