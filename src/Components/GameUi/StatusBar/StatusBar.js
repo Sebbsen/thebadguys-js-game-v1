@@ -12,27 +12,27 @@ export const StatusBar = () => {
     const [goldIngots, setGoldIngots] = useState(GameState.getResouce('goldIngots'));
 
     const collectWood = () => {
-        GameState.changeResource('wood', 10);
+        GameState.changeResource('wood', 50);
     };
 
     const collectPlanks = () => {
-        GameState.changeResource('planks', 10);
+        GameState.changeResource('planks', 50);
     };
 
     const collectIron = () => {
-        GameState.changeResource('iron', 10);
+        GameState.changeResource('iron', 50);
     };
 
     const collectGold = () => {
-        GameState.changeResource('gold', 10);
+        GameState.changeResource('gold', 50);
     };
 
     const collectIronIngots = () => {
-        GameState.changeResource('ironIngots', 10);
+        GameState.changeResource('ironIngots', 50);
     };
 
     const collectGoldIngots = () => {
-        GameState.changeResource('goldIngots', 10);
+        GameState.changeResource('goldIngots', 50);
     };
 
     useEffect(() => {
