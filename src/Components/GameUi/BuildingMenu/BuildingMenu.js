@@ -113,7 +113,6 @@ export const BuildingMenu = () => {
     <div id="buildingMenu" style={{
         position: 'absolute',
         bottom: '0',
-        left: '50%',
         pointerEvents: 'all',
         display: 'flex',
     }}>

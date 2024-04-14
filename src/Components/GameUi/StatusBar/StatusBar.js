@@ -96,7 +96,6 @@ export const StatusBar = () => {
         <div style={{
             position: 'absolute',
             top: '0',
-            left: '50%',
             pointerEvents: 'all',
             display: 'flex',
         }}>
