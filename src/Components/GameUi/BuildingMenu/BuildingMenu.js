@@ -7,6 +7,7 @@ import MinercampModel from '../../../models/MinercampModel';
 import PathModel from '../../../models/PathModel';
 import SawmillModel from '../../../models/SawmillModel';
 import IronSmelterModel from '../../../models/IronSmelterModel';
+import GoldSmelterModel from '../../../models/GoldSmelterModel';
 
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
 import PathImg from '../../../assets/4_directions_path.png';
@@ -85,6 +86,24 @@ export const BuildingMenu = () => {
       ],
       productionOutput: [
         {type: 'ironIngots', cost: 1},
+      ],
+    },
+    {
+      buildingModel: GoldSmelterModel,
+      type: 'GoldSmelter',
+      name: 'Gold Smelter',
+      img: LumberjackHutImg,
+      tileType: 'GS',
+      buildResources: [
+          {type: 'planks', cost: 40},
+          {type: 'gold', cost: 30},
+      ],
+      productionInput: [
+        {type: 'wood', cost: 1},
+        {type: 'gold', cost: 2},
+      ],
+      productionOutput: [
+        {type: 'goldIngots', cost: 1},
       ],
     },
   ];

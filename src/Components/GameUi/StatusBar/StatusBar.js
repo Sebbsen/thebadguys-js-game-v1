@@ -3,12 +3,13 @@ import GameState from '../../../state/GameManager';
 
 export const StatusBar = () => {
 
-    // State to hold the wood, planks, iron, gold and ironIngots values
+    // State to hold the wood, planks, iron, gold, ironIngots and goldIngots values
     const [wood, setWood] = useState(GameState.getResouce('wood'));
     const [planks, setPlanks] = useState(GameState.getResouce('planks'));
     const [iron, setIron] = useState(GameState.getResouce('iron'));
     const [gold, setGold] = useState(GameState.getResouce('gold'));
     const [ironIngots, setIronIngots] = useState(GameState.getResouce('ironIngots'));
+    const [goldIngots, setGoldIngots] = useState(GameState.getResouce('goldIngots'));
 
     const collectWood = () => {
         GameState.changeResource('wood', 10);
@@ -28,6 +29,10 @@ export const StatusBar = () => {
 
     const collectIronIngots = () => {
         GameState.changeResource('ironIngots', 10);
+    };
+
+    const collectGoldIngots = () => {
+        GameState.changeResource('goldIngots', 10);
     };
 
     useEffect(() => {
@@ -62,12 +67,19 @@ export const StatusBar = () => {
             }
         };
 
+        const goldIngotsObserver = {
+            update: () => {
+                setGoldIngots(GameState.getResouce('goldIngots'));
+            }
+        };
+
         // add observers to GameState
         GameState.addObserver('woodChanged', woodObserver);
         GameState.addObserver('planksChanged', planksObserver);
         GameState.addObserver('ironChanged', ironObserver);
         GameState.addObserver('goldChanged', goldObserver);
         GameState.addObserver('ironIngotsChanged', ironIngotsObserver);
+        GameState.addObserver('goldIngotsChanged', goldIngotsObserver);
 
         // removeObserver if component is unmounted
         return () => {
@@ -76,6 +88,7 @@ export const StatusBar = () => {
             GameState.removeObserver('ironChanged', ironObserver);
             GameState.removeObserver('goldChanged', goldObserver);
             GameState.removeObserver('ironIngotsChanged', ironIngotsObserver);
+            GameState.removeObserver('goldIngotsChanged', goldIngotsObserver);
         };
     }, []);
 
@@ -106,6 +119,10 @@ export const StatusBar = () => {
             <div>
                 <p>Iron Ingots: {ironIngots}</p>
                 <button onClick={collectIronIngots}>Collect Iron Ingots</button>
+            </div>
+            <div>
+                <p>Gold Ingots: {goldIngots}</p>
+                <button onClick={collectGoldIngots}>Collect Gold Ingots</button>
             </div>
         </div>
     );
