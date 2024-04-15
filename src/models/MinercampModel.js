@@ -13,6 +13,7 @@ class MinercampModel {
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
+        this.type = 'minercamp';
     }
 
     addToQueue(myResourceModel) {

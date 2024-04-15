@@ -10,6 +10,7 @@ class SawmillModel {
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
+        this.type = 'sawmill';
     }
 
     checkForAutoWork() {

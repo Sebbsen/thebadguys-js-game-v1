@@ -9,6 +9,7 @@ class CompassFactoryModel {
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
+        this.type = 'compassfactory';
     }
 
     checkForAutoWork() {

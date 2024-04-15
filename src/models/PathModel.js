@@ -4,6 +4,7 @@ class PathModel {
         this.coords = id.split('-');
         this.totalHitpoints = totalHitpoints;
         this.remainingHitpoints = remainingHitpoints;
+        this.type = 'path';
     }
   
     updateRemainingHitpoints(amount) {

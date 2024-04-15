@@ -9,6 +9,7 @@ class IronSmelterModel {
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
+        this.type = 'ironsmelter';
     }
 
     checkForAutoWork() {

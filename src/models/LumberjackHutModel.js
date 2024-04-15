@@ -12,6 +12,7 @@ class LumberjackHutModel {
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
+        this.type = 'lumberjackhut';
     }
 
     addToQueue(myWoodModel) {
