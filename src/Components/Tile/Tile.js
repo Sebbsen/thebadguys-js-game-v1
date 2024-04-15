@@ -71,14 +71,16 @@ const Tile = ({ tileType, id, coords }) => {
     }
 
     const { state, dispatch } = useContext(MyReactState);
+    const { isDismantling } = state;
 
     const handleTileClick = () => {
         dispatch({ type: 'updateTileClickedCoords', payload: id });
     };
 
+
     return (
         <div 
-            className="tile" 
+            className={`tile ${isDismantling ? 'tile--is-dismantling' : ''}`}
             data-coords={id} 
             style={{width: "100%", height: "100%"}}
             onClick={handleTileClick}

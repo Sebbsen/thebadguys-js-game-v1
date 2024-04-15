@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { MyReactState }  from '../../../state/ReactContext';
 import { BuyBuildingItem } from './BuyBuildingItem';
+import { DismantleBuilding } from './DismantleBuilding';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
 import MinercampModel from '../../../models/MinercampModel';
@@ -73,7 +74,7 @@ export const BuildingMenu = () => {
     },
     {
       buildingModel: IronSmelterModel,
-      type: 'ironSmelter',
+      type: 'ironsmelter',
       name: 'Iron Smelter',
       img: LumberjackHutImg,
       tileType: 'IS',
@@ -91,7 +92,7 @@ export const BuildingMenu = () => {
     },
     {
       buildingModel: GoldSmelterModel,
-      type: 'GoldSmelter',
+      type: 'goldsmelter',
       name: 'Gold Smelter',
       img: LumberjackHutImg,
       tileType: 'GS',
@@ -152,6 +153,7 @@ export const BuildingMenu = () => {
           </div>
         )
       })}
+      <DismantleBuilding buildingTypes={buildingsToBuy}/>
     </div>
   );
 };

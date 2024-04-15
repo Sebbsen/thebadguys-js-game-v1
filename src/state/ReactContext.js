@@ -15,6 +15,8 @@ function reducer(state, action) {
       return { ...state, tileClickedCoords: {coords: action.payload, timestamp: Date.now()}};
     case 'updateIsBuilding':
       return { ...state, isBuilding: action.payload};
+    case 'updateIsDismantling':
+      return { ...state, isDismantling: action.payload};
     // Alert
     case 'showAlert':
       return { ...state, alert: { message: action.payload, isVisible: true } };
