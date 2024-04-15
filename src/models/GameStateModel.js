@@ -10,7 +10,7 @@ class GameStateModel {
             planks: 0,
             iron: 0,
             gold: 0,
-            ironIngots: 12,
+            ironIngots: 0,
             goldIngots: 0,
             compasses: 0,
         };
@@ -55,11 +55,9 @@ class GameStateModel {
         return this.map;
     }
 
-    checkIfPathRemovedOrAdded(oldTile, newTile) {
-        if (oldTile === 'P' || newTile === 'P') {
-            const baseEntity = this.entities.find(entity => entity.type === 'base'); //TODO: find a better way to get the base entity (mabye store it on load)
-            baseEntity.setConnectedAttOnEntities();
-        }
+    checkForPathConnection(oldTile, newTile) {
+        const baseEntity = this.entities.find(entity => entity.type === 'base'); //TODO: find a better way to get the base entity (mabye store it on load)
+        baseEntity.setConnectedAttOnEntities();
     }
 
     editMap(coords, letter) {
@@ -68,8 +66,16 @@ class GameStateModel {
         const y = coords[1];
         
         if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) { // check if coords are within map
-            this.map.mapMatrix[x][y] = letter;
-            this.checkIfPathRemovedOrAdded(this.map.mapMatrix[x][y], letter); 
+            
+            const oldTile = this.map.mapMatrix[x][y];
+            const newTile = letter;
+            this.map.mapMatrix[x][y] = newTile;
+            
+            // check path connection
+            if (newTile !== 'E' || oldTile === 'P' ) { // check if new tile is not empty or old tile is path
+                this.checkForPathConnection(); 
+            }
+            
             this.notifyObservers('mapEdited', this.map);
         }
     }

@@ -8,7 +8,7 @@ class LumberjackHutModel {
         this.jobQueue = [];
         this.lvl = lvl;
         this.productionRate = 1 * lvl;
-        this.workingRadius = 1;
+        this.workingRadius = 4;
         this.baseWorkInterval = 1000;
         this.needsPath = true;
         this.isConnected = false;
@@ -67,16 +67,21 @@ class LumberjackHutModel {
         setInterval(() => {
             const entities = GameState.getEntities();
             if (this.jobQueue.length <= 0) {
-                const entity = entities.find(entity => {
+                let nearestEntity = null;
+                let nearestDistance = Infinity;
+
+                entities.forEach(entity => {
                     if (entity instanceof WoodModel) {
                         let distance = Math.max(Math.abs(this.coords[0] - entity.coords[0]), Math.abs(this.coords[1] - entity.coords[1]));
-                        return distance <= this.workingRadius;
+                        if (distance <= this.workingRadius && distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestEntity = entity;
+                        }
                     }
-                    return false;
                 });
 
-                if (entity) {
-                    this.addToQueue(entity);
+                if (nearestEntity) {
+                    this.addToQueue(nearestEntity);
                 }
             }
         }, 1000);

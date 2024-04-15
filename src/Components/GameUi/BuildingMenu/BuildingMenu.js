@@ -118,8 +118,8 @@ export const BuildingMenu = () => {
           {type: 'ironIngots', cost: 100},
       ],
       productionInput: [
-        {type: 'iron', cost: 4},
-        {type: 'gold', cost: 2},
+        {type: 'ironIngots', cost: 4},
+        {type: 'goldIngots', cost: 2},
       ],
       productionOutput: [
         {type: 'compasses', cost: 1},
