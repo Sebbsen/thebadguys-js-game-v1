@@ -8,13 +8,14 @@ class SawmillModel {
         this.lvl = lvl;
         this.productionRate = 1 * lvl;
         this.baseWorkInterval = 1000;
+        this.autoWorkIntervalId = null;
         this.needsPath = true;
         this.isConnected = false;
         this.type = 'sawmill';
     }
 
     checkForAutoWork() {
-        setInterval(() => {
+        this.autoWorkIntervalId = setInterval(() => {
             if (this.isConnected === false) {
                 return;
             }
@@ -28,6 +29,12 @@ class SawmillModel {
         
     }
     
+    stop() {
+        if (this.autoWorkIntervalId) {
+            clearInterval(this.autoWorkIntervalId);
+            this.autoWorkIntervalId = null;
+        }
+    }
     
 
     

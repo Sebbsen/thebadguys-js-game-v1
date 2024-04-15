@@ -11,6 +11,8 @@ class MinercampModel {
         this.productionRate = 1 * lvl;
         this.workingRadius = 1;
         this.baseWorkInterval = 1000;
+        this.autoWorkIntervalId = null;
+        this.workTimeoutId = null;
         this.needsPath = true;
         this.isConnected = false;
         this.type = 'minercamp';
@@ -49,7 +51,7 @@ class MinercampModel {
                 let jobDistance = Math.max(Math.abs(this.coords[0] - currentJob.coords[0]), Math.abs(this.coords[1] - currentJob.coords[1]));
 
                 // Wait based on the distance, then execute the job.
-                setTimeout(() => {
+                this.workTimeoutId = setTimeout(() => {
                     // Make sure the job is still relevant.
                     if (currentJob.remainingResource <= 0) {
                         this.jobQueue.shift(); // Remove the job when it is completed.
@@ -66,7 +68,7 @@ class MinercampModel {
     }
 
     checkForAutoWork() {
-        setInterval(() => {
+        this.autoWorkIntervalId = setInterval(() => {
             const entities = GameState.getEntities();
             if (this.jobQueue.length <= 0) {
                 const entity = entities.find(entity => {
@@ -84,6 +86,16 @@ class MinercampModel {
         }, 1000);
     }
 
+    stop() {
+        if (this.autoWorkIntervalId) {
+            clearInterval(this.autoWorkIntervalId);
+            this.autoWorkIntervalId = null;
+        }
+        if (this.workTimeoutId) {
+            clearTimeout(this.workTimeoutId);
+            this.workTimeoutId = null;
+        }
+    }
 
 
 

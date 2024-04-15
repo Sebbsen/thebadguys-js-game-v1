@@ -7,13 +7,14 @@ class GoldSmelterModel {
         this.lvl = lvl;
         this.productionRate = 1 * lvl;
         this.baseWorkInterval = 1000;
+        this.autoWorkIntervalId = null;
         this.needsPath = true;
         this.isConnected = false;
         this.type = 'goldsmelter';
     }
 
     checkForAutoWork() {
-        setInterval(() => {
+        this.autoWorkIntervalId = setInterval(() => {
             if (this.isConnected === false) {
                 return;
             }
@@ -28,6 +29,12 @@ class GoldSmelterModel {
         }, 1000);
     }
     
+    stop() {
+        if (this.autoWorkIntervalId) {
+            clearInterval(this.autoWorkIntervalId);
+            this.autoWorkIntervalId = null;
+        }
+    }
     
 
     

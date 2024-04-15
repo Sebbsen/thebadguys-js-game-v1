@@ -1,4 +1,6 @@
 import WoodModel from './WoodModel';
+import IronModel from './IronModel';
+import GoldModel from './GoldModel';
 import GameState from '../state/GameManager';
 
 class LumberjackHutModel {
@@ -10,6 +12,8 @@ class LumberjackHutModel {
         this.productionRate = 1 * lvl;
         this.workingRadius = 4;
         this.baseWorkInterval = 1000;
+        this.autoWorkIntervalId = null;
+        this.workTimeoutId = null;
         this.needsPath = true;
         this.isConnected = false;
         this.type = 'lumberjackhut';
@@ -35,8 +39,17 @@ class LumberjackHutModel {
         GameState.editEntity(myWoodModel, 'remainingResource', myWoodModel.remainingResource - this.productionRate);
         GameState.addWood(this.productionRate);
         if (myWoodModel.remainingResource <= 0) {
-            GameState.editMap(myWoodModel.coords, 'E');
             GameState.removeEntity(myWoodModel);
+            const random = Math.random();
+            if (random <= 0.02) {
+                GameState.editMap(myWoodModel.coords, 'G');
+                GameState.addEntity(new GoldModel({ id: myWoodModel.id }));
+            } else if (random > 0.1 && random <= 0.15) {
+                GameState.editMap(myWoodModel.coords, 'I');
+                GameState.addEntity(new IronModel({ id: myWoodModel.id }));
+            } else {
+                GameState.editMap(myWoodModel.coords, 'E');
+            }
         }
     }
 
@@ -48,7 +61,7 @@ class LumberjackHutModel {
                 let jobDistance = Math.max(Math.abs(this.coords[0] - currentJob.coords[0]), Math.abs(this.coords[1] - currentJob.coords[1]));
 
                 // Wait based on the distance, then execute the job.
-                setTimeout(() => {
+                this.workTimeoutId = setTimeout(() => {
                     // Make sure the job is still relevant.
                     if (currentJob.remainingResource <= 0) {
                         this.jobQueue.shift(); // Remove the job when it is completed.
@@ -65,7 +78,7 @@ class LumberjackHutModel {
     }
 
     checkForAutoWork() {
-        setInterval(() => {
+        this.autoWorkIntervalId = setInterval(() => {
             const entities = GameState.getEntities();
             if (this.jobQueue.length <= 0) {
                 let nearestEntity = null;
@@ -88,10 +101,16 @@ class LumberjackHutModel {
         }, 1000);
     }
 
-
-
-
-
+    stop() {
+        if (this.autoWorkIntervalId) {
+            clearInterval(this.autoWorkIntervalId);
+            this.autoWorkIntervalId = null;
+        }
+        if (this.workTimeoutId) {
+            clearTimeout(this.workTimeoutId);
+            this.workTimeoutId = null;
+        }
+    }
 }
 
 export default LumberjackHutModel;

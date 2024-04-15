@@ -149,6 +149,10 @@ class GameStateModel {
     removeEntity(entity) {
         const index = this.entities.indexOf(entity);
         if (index !== -1) {
+            // stop entity if it has a stop method
+            if (this.entities[index].stop) {
+                this.entities[index].stop();
+            }
             this.entities.splice(index, 1);
             this.notifyObservers('entityRemoved', entity);
         }
