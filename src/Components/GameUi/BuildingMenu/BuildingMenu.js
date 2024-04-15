@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { MyReactState }  from '../../../state/ReactContext';
-import { BuyBuildingItem } from '../BuyBuildingItem/BuyBuildingItem';
+import { BuyBuildingItem } from './BuyBuildingItem';
 
 import LumberjackHutModel from '../../../models/LumberjackHutModel';
 import MinercampModel from '../../../models/MinercampModel';
