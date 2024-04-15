@@ -44,6 +44,11 @@ export const BuyBuildingItem = ({
 
     useEffect(() => {
         if (isBuilding === type) {
+            // Check if the tile is occupied
+            if (GameState.getEntityById(tileClickedCoords.coords)){
+                dispatch({ type: 'showAlert', payload: 'Tile is occupied' });
+                return;
+            }
             const currentResources = GameState.getResources();
 
             // Check if the player has enough of each resource
