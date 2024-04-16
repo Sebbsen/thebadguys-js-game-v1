@@ -9,6 +9,8 @@ export const GameContent = () => {
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
+      height: '100vh',
+      overflow: 'hidden',
     }}>
       <Map>      
       </Map> 

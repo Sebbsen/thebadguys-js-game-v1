@@ -25,36 +25,77 @@ export const Map = ({children}) => {
         GameState.removeObserver(`mapEdited`, mapObserver);
         };
     }, [map]);
+
+    // zoom and pan
+    const [scale, setScale] = useState(1);
+    const [translate, setTranslate] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            switch (event.key) {
+                case '+':
+                    setScale(prevScale => prevScale + 0.5);
+                    break;
+                case '-':
+                    setScale(prevScale => prevScale - 0.5);
+                    break;
+                case 'ArrowRight':
+                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 5 }));
+                    break;
+                case 'ArrowLeft':
+                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x + 5 }));
+                    break;
+                case 'ArrowUp':
+                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y + 5 }));
+                    break;
+                case 'ArrowDown':
+                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y - 5 }));
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
   
   
 
   return (
-    console.log('rerender map:', map),
     <div style={{
-        gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
-        width: mapSize,
-        height: mapSize,
-        backgroundColor: 'white',
-        display: "grid",
-        transform: "rotateX(55deg) rotateZ(45deg)",
+        transform: `translate(${translate.x}%, ${translate.y}%) scale(${scale})`,
+        transition: 'transform 0.1s',
     }}>
-        {children}
-        {mapMatrix.map((row, rowIndex) => (
-            row.map((tile, columnIndex) => (
-                <div 
-                    style={{
-                        gridArea: (columnIndex+1) + "/" + (rowIndex+1),
-                    }}
-                >
-                    <Tile 
-                        key={`${rowIndex}-${columnIndex}`}
-                        tileType={tile}
-                        id={`${rowIndex}-${columnIndex}`}
-                        coords={[columnIndex,rowIndex]}
-                    />
-                </div>
-            ))
-        ))}
+        <div style={{
+            gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
+            width: mapSize,
+            height: mapSize,
+            backgroundColor: 'white',
+            display: "grid",
+            transform: "rotateX(55deg) rotateZ(45deg)",
+        }}>
+            {children}
+            {mapMatrix.map((row, rowIndex) => (
+                row.map((tile, columnIndex) => (
+                    <div 
+                        style={{
+                            gridArea: (columnIndex+1) + "/" + (rowIndex+1),
+                        }}
+                    >
+                        <Tile 
+                            key={`${rowIndex}-${columnIndex}`}
+                            tileType={tile}
+                            id={`${rowIndex}-${columnIndex}`}
+                            coords={[columnIndex,rowIndex]}
+                        />
+                    </div>
+                ))
+            ))}
+        </div>
     </div>
   );
 };
