@@ -52,7 +52,7 @@ const WoodTile = ({id, coords}) => {
                     top: 0,
                     left: 0,
                     pointerEvents: "none",
-                    transform: "rotateZ(-45deg) rotateX(-55deg) scale(1.1, 3.1) translate(-2px, -6px)"
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1) translate(-2px, -6px)"
                 }} 
             />
                 <div style={

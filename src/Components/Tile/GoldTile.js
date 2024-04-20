@@ -50,7 +50,7 @@ const GoldTile = ({id, coords}) => {
                     top: 0,
                     left: 0,
                     pointerEvents: "none",
-                    transform: "rotateZ(-45deg) rotateX(-55deg) scale(0.5, 1.5)"
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(0.5, 1.5)"
                 }} 
             />
             <div style={

@@ -68,7 +68,7 @@ const LumberjackHutTile = ({ id, coords }) => {
                     top: 0,
                     left: 0,
                     pointerEvents: "none",
-                    transform: "rotateZ(-45deg) rotateX(-55deg) scale(1.1, 3.1)"
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1)"
                 }}
             />
         </div>

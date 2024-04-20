@@ -9,10 +9,15 @@ import PathModel from '../../../models/PathModel';
 import SawmillModel from '../../../models/SawmillModel';
 import IronSmelterModel from '../../../models/IronSmelterModel';
 import GoldSmelterModel from '../../../models/GoldSmelterModel';
+import CompassFactoryModel from '../../../models/CompassFactoryModel';
 
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
+import SawmillImg from '../../../assets/sawmill_building.png';
+import GoldSmelterImg from '../../../assets/gold_smelter_building.png';
+import IronSmelterImg from '../../../assets/iron_smelter_building.png';
+import MinercampImg from '../../../assets/minercamp_building.png';
+import CompassFactory from '../../../assets/factory_building.png';
 import PathImg from '../../../assets/4_directions_path.png';
-import CompassFactoryModel from '../../../models/CompassFactoryModel';
 
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);
@@ -46,7 +51,7 @@ export const BuildingMenu = () => {
       buildingModel: SawmillModel,
       type: 'sawmill',
       name: 'Sawmill',
-      img: LumberjackHutImg,
+      img: SawmillImg,
       tileType: 'S',
       buildResources: [
           {type: 'wood', cost: 40},
@@ -62,7 +67,7 @@ export const BuildingMenu = () => {
       buildingModel: MinercampModel,
       type: 'minercamp',
       name: 'Minercamp',
-      img: LumberjackHutImg,
+      img: MinercampImg,
       tileType: 'IM',
       buildResources: [
           {type: 'wood', cost: 5},
@@ -76,7 +81,7 @@ export const BuildingMenu = () => {
       buildingModel: IronSmelterModel,
       type: 'ironsmelter',
       name: 'Iron Smelter',
-      img: LumberjackHutImg,
+      img: IronSmelterImg,
       tileType: 'IS',
       buildResources: [
           {type: 'planks', cost: 40},
@@ -94,7 +99,7 @@ export const BuildingMenu = () => {
       buildingModel: GoldSmelterModel,
       type: 'goldsmelter',
       name: 'Gold Smelter',
-      img: LumberjackHutImg,
+      img: GoldSmelterImg,
       tileType: 'GS',
       buildResources: [
           {type: 'planks', cost: 40},
@@ -112,7 +117,7 @@ export const BuildingMenu = () => {
       buildingModel: CompassFactoryModel,
       type: 'compassfactory',
       name: 'Compass Factory',
-      img: LumberjackHutImg,
+      img: CompassFactory,
       tileType: 'CF',
       buildResources: [
           {type: 'planks', cost: 300},

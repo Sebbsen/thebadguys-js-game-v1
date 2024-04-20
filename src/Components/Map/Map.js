@@ -76,7 +76,7 @@ export const Map = ({children}) => {
             height: mapSize,
             backgroundColor: 'white',
             display: "grid",
-            transform: "rotateX(55deg) rotateZ(45deg)",
+            transform: "rotateX(60deg) rotateZ(45deg)",
         }}>
             {children}
             {mapMatrix.map((row, rowIndex) => (

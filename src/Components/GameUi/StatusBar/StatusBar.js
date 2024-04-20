@@ -12,6 +12,16 @@ export const StatusBar = () => {
     const [goldIngots, setGoldIngots] = useState(GameState.getResouce('goldIngots'));
     const [compasses, setCompasses] = useState(GameState.getResouce('compasses'));
 
+    const addUnlimitedResources = () => {
+        GameState.changeResource('wood', 9999);
+        GameState.changeResource('planks', 9999);
+        GameState.changeResource('iron', 9999);
+        GameState.changeResource('gold', 9999);
+        GameState.changeResource('ironIngots', 9999);
+        GameState.changeResource('goldIngots', 9999);
+        GameState.changeResource('compasses', 9999);
+    };
+
     const collectWood = () => {
         GameState.changeResource('wood', 50);
     };
@@ -139,6 +149,9 @@ export const StatusBar = () => {
             <div>
                 <p>Compasses: {compasses}</p>
                 <button onClick={collectCompasses}>Collect Compasses</button>
+            </div>
+            <div>
+                <button onClick={addUnlimitedResources}>Unlimited Resources</button>
             </div>
         </div>
     );
