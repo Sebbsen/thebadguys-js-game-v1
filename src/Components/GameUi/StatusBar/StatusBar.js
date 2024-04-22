@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import GameState from '../../../state/GameManager';
 
+import StatusbarImg from '../../../assets/statusbar.png';
+
 export const StatusBar = () => {
 
     // State to hold the wood, planks, iron, gold, ironIngots, goldIngots and compasses values
@@ -20,34 +22,6 @@ export const StatusBar = () => {
         GameState.changeResource('ironIngots', 9999);
         GameState.changeResource('goldIngots', 9999);
         GameState.changeResource('compasses', 9999);
-    };
-
-    const collectWood = () => {
-        GameState.changeResource('wood', 50);
-    };
-
-    const collectPlanks = () => {
-        GameState.changeResource('planks', 50);
-    };
-
-    const collectIron = () => {
-        GameState.changeResource('iron', 50);
-    };
-
-    const collectGold = () => {
-        GameState.changeResource('gold', 50);
-    };
-
-    const collectIronIngots = () => {
-        GameState.changeResource('ironIngots', 50);
-    };
-
-    const collectGoldIngots = () => {
-        GameState.changeResource('goldIngots', 50);
-    };
-
-    const collectCompasses = () => {
-        GameState.changeResource('compasses', 50);
     };
 
     useEffect(() => {
@@ -121,35 +95,50 @@ export const StatusBar = () => {
             top: '0',
             pointerEvents: 'all',
             display: 'flex',
+            color: 'white',
+            //pointerEvents: 'none',
+            fontSize: '16px',
+            fontWeight: 'bold',
         }}>
-            <div>
-                <p>Wood: {wood}</p>
-                <button onClick={collectWood}>Collect Wood</button>
-            </div>
-            <div>
-                <p>Planks: {planks}</p>
-                <button onClick={collectPlanks}>Collect Planks</button>
-            </div>
-            <div>
-                <p>Iron: {iron}</p>
-                <button onClick={collectIron}>Collect Iron</button>
-            </div>
-            <div>
-                <p>Gold: {gold}</p>
-                <button onClick={collectGold}>Collect Gold</button>
-            </div>
-            <div>
-                <p>Iron Ingots: {ironIngots}</p>
-                <button onClick={collectIronIngots}>Collect Iron Ingots</button>
-            </div>
-            <div>
-                <p>Gold Ingots: {goldIngots}</p>
-                <button onClick={collectGoldIngots}>Collect Gold Ingots</button>
-            </div>
-            <div>
-                <p>Compasses: {compasses}</p>
-                <button onClick={collectCompasses}>Collect Compasses</button>
-            </div>
+            <img src={StatusbarImg} alt="statusbar" />
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '55px',
+                marginRight: '85px',
+            }}>{wood}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '154px',
+            }}>{planks}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '254px',
+            }}>{iron}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '355px',
+            }}>{gold}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '454px',
+            }}>{ironIngots}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '556px',
+            }}>{goldIngots}</div>
+            <div style={{
+                position: 'absolute',
+                top: '19px',
+                left: '656px',
+            }}>{compasses}</div>
+
+            
             <div>
                 <button onClick={addUnlimitedResources}>Unlimited Resources</button>
             </div>
