@@ -80,6 +80,26 @@ class GameStateModel {
         }
     }
 
+    get4Neighbours(x, y) {
+        const neighbours = [];
+        const surroundingCordsOffset = [
+            [-1,0], [0,1], [1,0], [0,-1], 
+        ];
+
+        surroundingCordsOffset.forEach((offset) => {
+            const surroundingCord = [];
+            surroundingCord[0] = parseFloat(x) + parseFloat(offset[0]);
+            surroundingCord[1] = parseFloat(y) + parseFloat(offset[1]);
+            if (surroundingCord[0] >= 0 && surroundingCord[0] < this.map.mapSize/this.map.tileSize && surroundingCord[1] >= 0 && surroundingCord[1] < this.map.mapSize/this.map.tileSize) {
+                neighbours.push(this.map.mapMatrix[surroundingCord[0]][surroundingCord[1]]);
+            } else {
+                neighbours.push('E');
+            }
+        });
+
+        return neighbours;
+    }
+
     // resources
     getResources() {
         return this.resources;

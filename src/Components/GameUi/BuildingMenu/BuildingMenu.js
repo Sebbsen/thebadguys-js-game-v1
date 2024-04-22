@@ -17,7 +17,7 @@ import GoldSmelterImg from '../../../assets/gold_smelter_building.png';
 import IronSmelterImg from '../../../assets/iron_smelter_building.png';
 import MinercampImg from '../../../assets/minercamp_building.png';
 import CompassFactory from '../../../assets/factory_building.png';
-import PathImg from '../../../assets/4_directions_path.png';
+import PathImg from '../../../assets/path_building.png';
 
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);

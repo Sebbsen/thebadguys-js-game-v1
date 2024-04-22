@@ -60,7 +60,7 @@ const Tile = ({ tileType, id, coords }) => {
             tileComponent = <SawmillTile/>;
             break;
         case 'P':
-            tileComponent = <PathTile />;
+            tileComponent = <PathTile id={id} coords={coords} />;
             break;
         case 'CF':
             tileComponent = <CompassFactoryTile />;
