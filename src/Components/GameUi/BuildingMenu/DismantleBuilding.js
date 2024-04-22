@@ -53,7 +53,12 @@ export const DismantleBuilding = ({buildingTypes = []}) => {
     }, [tileClickedCoords]);
 
     return (
-        <button onClick={handleDismantleBuilding}>
+        <button
+            onClick={handleDismantleBuilding}
+            style={{
+                position: 'absolute',
+            }}
+        >
             Dismantle Building
         </button>
     );

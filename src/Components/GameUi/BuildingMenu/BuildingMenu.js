@@ -11,6 +11,8 @@ import IronSmelterModel from '../../../models/IronSmelterModel';
 import GoldSmelterModel from '../../../models/GoldSmelterModel';
 import CompassFactoryModel from '../../../models/CompassFactoryModel';
 
+import BuildingMenuImg from '../../../assets/buildingmenu.png';
+
 import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
 import SawmillImg from '../../../assets/sawmill_building.png';
 import GoldSmelterImg from '../../../assets/gold_smelter_building.png';
@@ -137,28 +139,38 @@ export const BuildingMenu = () => {
   return (
     <div id="buildingMenu" style={{
         position: 'absolute',
+        left: '50%',
         bottom: '0',
         pointerEvents: 'all',
-        display: 'flex',
+        transform: 'translate(-50%, 0)',
     }}>
-      Buy Buildings:
-      {buildingsToBuy.map((building, index)=>{
-        return (
-          <div key={index}>
-          <BuyBuildingItem  
-            buildingModel={building.buildingModel}
-            type={building.type}
-            name={building.name}
-            img={building.img}
-            tileType={building.tileType}
-            buildResources={building.buildResources}
-            productionInput={building.productionInput}
-            productionOutput={building.productionOutput}
-          />
-          </div>
-        )
-      })}
-      <DismantleBuilding buildingTypes={buildingsToBuy}/>
+      <img src={BuildingMenuImg} alt="buildingmenu" />
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        display: 'flex',
+        gap: '50px',
+      }}>
+        {buildingsToBuy.map((building, index)=>{
+          return (
+            <div key={index}>
+            <BuyBuildingItem  
+              buildingModel={building.buildingModel}
+              type={building.type}
+              name={building.name}
+              img={building.img}
+              tileType={building.tileType}
+              buildResources={building.buildResources}
+              productionInput={building.productionInput}
+              productionOutput={building.productionOutput}
+            />
+            </div>
+          )
+        })}
+      </div>
+        <DismantleBuilding buildingTypes={buildingsToBuy}/>
     </div>
   );
 };

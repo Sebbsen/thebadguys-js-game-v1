@@ -4,12 +4,12 @@ import { MyReactState } from '../../../state/ReactContext';
 
 
 export const BuyBuildingItem = ({
-    buildingModel, 
-    type = '', 
+    buildingModel,
+    type = '',
     name = '',
     img = '',
     tileType = '',
-    buildResources = [], 
+    buildResources = [],
     productionInput = [],
     productionOutput = []
 }) => {
@@ -45,7 +45,7 @@ export const BuyBuildingItem = ({
     useEffect(() => {
         if (isBuilding === type) {
             // Check if the tile is occupied
-            if (GameState.getEntityById(tileClickedCoords.coords)){
+            if (GameState.getEntityById(tileClickedCoords.coords)) {
                 dispatch({ type: 'showAlert', payload: 'Tile is occupied' });
                 return;
             }
@@ -65,11 +65,11 @@ export const BuyBuildingItem = ({
                 // Proceed with building
                 const newBuildingModel = new buildingModel({ id: tileClickedCoords.coords });
                 GameState.addEntity(newBuildingModel);
-                
+
                 if (newBuildingModel.checkForAutoWork) {
                     newBuildingModel.checkForAutoWork();
                 }
-                
+
                 GameState.editMap(tileClickedCoords.coords.split('-'), tileType);
             } else {
                 // Not enough resources alert
@@ -77,50 +77,55 @@ export const BuyBuildingItem = ({
                 return;
             }
         }
-    }, [tileClickedCoords]); 
+    }, [tileClickedCoords]);
 
     return (
         <div
             style={{
-                padding: '20px',
-                backgroundColor: 'lightblue',
+                padding: '10px',
                 cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '10px',
+                textAlign: 'center',
+                opacity: isBuilding && isBuilding !== type ? '0.5' : '1',
             }}
             onClick={handleBuyBuilding}
         >
             <img
-                src={img} 
+                src={img}
                 alt={name}
                 style={{
                     width: '50px',
                     height: '50px',
                 }}
             />
-            {isBuilding === type ? (
-                <div>Place {name}</div>
-            ) : (
                 <div>
                     <div>{name}</div>
-                    <div>
-                        Costs: 
-                        {buildResources.map((resource, index) => (
-                            <div key={index}>{resource.type}: {resource.cost}</div>
-                        ))}
-                    </div>
-                    <div>
-                        Input: 
-                        {productionInput.map((input, index) => (
-                            <div key={index}>{input.type}: {input.cost}</div>
-                        ))}
-                    </div>
-                    <div>
-                        Output: 
-                        {productionOutput.map((output, index) => (
-                            <div key={index}>{output.type}: {output.cost}</div>
-                        ))}
+                    <div style={{
+                        display: 'none'
+                    }}>
+                        <div>
+                            Costs:
+                            {buildResources.map((resource, index) => (
+                                <div key={index}>{resource.type}: {resource.cost}</div>
+                            ))}
+                        </div>
+                        <div>
+                            Input:
+                            {productionInput.map((input, index) => (
+                                <div key={index}>{input.type}: {input.cost}</div>
+                            ))}
+                        </div>
+                        <div>
+                            Output:
+                            {productionOutput.map((output, index) => (
+                                <div key={index}>{output.type}: {output.cost}</div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            )}
         </div>
     );
 };
