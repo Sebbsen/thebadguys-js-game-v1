@@ -14,6 +14,8 @@ export const StatusBar = () => {
     const [goldIngots, setGoldIngots] = useState(GameState.getResouce('goldIngots'));
     const [compasses, setCompasses] = useState(GameState.getResouce('compasses'));
 
+    /* DEV CHEAT START */
+    /* Add unlimited resources when u is pressed 7 times */
     const addUnlimitedResources = () => {
         GameState.changeResource('wood', 9999);
         GameState.changeResource('planks', 9999);
@@ -23,6 +25,35 @@ export const StatusBar = () => {
         GameState.changeResource('goldIngots', 9999);
         GameState.changeResource('compasses', 9999);
     };
+
+    const [keyPressCount, setKeyPressCount] = useState(0);
+    const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'u') {
+                const currentTime = new Date().getTime();
+                if (currentTime - lastKeyPressTime < 1000) { // 1000 ms = 1 second
+                    setKeyPressCount(keyPressCount + 1);
+                    if (keyPressCount >= 6) {
+                        addUnlimitedResources();
+                        setKeyPressCount(0);
+                    }
+                } else {
+                    setKeyPressCount(1);
+                }
+                setLastKeyPressTime(currentTime);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [keyPressCount, lastKeyPressTime]);
+    /* DEV CHEAT END */
+
 
     useEffect(() => {
         // What to do when the observer is triggered
@@ -137,11 +168,6 @@ export const StatusBar = () => {
                 top: '19px',
                 left: '656px',
             }}>{compasses}</div>
-
-            
-            <div>
-                <button onClick={addUnlimitedResources}>Unlimited Resources</button>
-            </div>
         </div>
     );
 };
