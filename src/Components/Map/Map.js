@@ -27,7 +27,7 @@ export const Map = ({children}) => {
     }, [map]);
 
     // zoom and pan
-    const [scale, setScale] = useState(1);
+    const [scale, setScale] = useState(3.5);
     const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
