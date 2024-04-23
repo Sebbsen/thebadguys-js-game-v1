@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import GameState from '../../../state/GameManager';
 import { MyReactState } from '../../../state/ReactContext';
 
+import DismantleIcon from '../../../assets/dismantle_icon.png';
+import './DismantleBuilding.css'
+
 export const DismantleBuilding = ({buildingTypes = []}) => {
     const { dispatch, state } = useContext(MyReactState);
     const { tileClickedCoords } = state;
@@ -53,13 +56,15 @@ export const DismantleBuilding = ({buildingTypes = []}) => {
     }, [tileClickedCoords]);
 
     return (
-        <button
-            onClick={handleDismantleBuilding}
-            style={{
-                position: 'absolute',
-            }}
-        >
-            Dismantle Building
-        </button>
+
+        <img onClick={handleDismantleBuilding}
+        className='hover_ani'
+        style={{
+            position: 'absolute',
+            width: '80px',
+            top: '-29px',
+            right: '-20px',
+        }} src={DismantleIcon} alt="Dismantle building" />
+       
     );
 };
