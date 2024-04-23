@@ -81,6 +81,7 @@ export const BuyBuildingItem = ({
 
     return (
         <div
+        className='hover_ani'
             style={{
                 padding: '10px',
                 cursor: 'pointer',

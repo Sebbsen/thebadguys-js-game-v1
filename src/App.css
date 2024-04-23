@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.hover_ani {
+  transition: transform 0.2s;
+}
+
+.hover_ani:hover {
+  transform: scale(1.1);
+}
