@@ -12,9 +12,9 @@ class BaseModel {
     getConnectedEntitiesCoords = () => {
         const myMatrix = GameState.getMap().mapMatrix;
         const surroundingCordsOffset = [
-            [-1,-1], [-1,0], [-1,1],
-            [0,-1],          [0,1],
-            [1,-1],  [1,0],  [1,1],
+                    [-1,0], 
+            [0,-1],         [0,1],
+                    [1,0],
         ]
     
     
