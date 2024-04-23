@@ -1,5 +1,5 @@
 import GameStateModel from '../models/GameStateModel';
-import mapMatrix from '../assets/mapMatrix.json';
+import mapMatrix from '../assets/mapMatrix32.json';
 import { getEntities } from '../services/entitiesFactory';
 
 
