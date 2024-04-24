@@ -11,7 +11,7 @@ export const GameContent = () => {
       flexDirection: 'column',
       height: '100vh',
       overflow: 'hidden',
-      backgroundColor: 'black',
+      backgroundColor: '#4a92c0',
     }}> 
       <Map>      
       </Map> 

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Tile from '../Tile/Tile';
 import GameState from '../../state/GameManager';
+import WaterTileImg from '../../assets/water_tile.png';
+import WaterBg from './WaterBg';
 
 
 export const Map = ({children}) => {
@@ -71,17 +73,19 @@ export const Map = ({children}) => {
         transition: 'transform 0.1s',
     }}>
         <div style={{
+            position: "relative",
             gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
             width: mapSize,
             height: mapSize,
-            backgroundColor: 'white',
             display: "grid",
             transform: "rotateX(60deg) rotateZ(45deg)",
         }}>
+            <WaterBg />
+        
             {children}
             {mapMatrix.map((row, rowIndex) => (
                 row.map((tile, columnIndex) => (
-                    <div 
+                    tile !== 'A' && <div 
                         style={{
                             gridArea: (columnIndex+1) + "/" + (rowIndex+1),
                         }}
