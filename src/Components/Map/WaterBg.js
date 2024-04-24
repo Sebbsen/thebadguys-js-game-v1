@@ -17,7 +17,7 @@ const WaterBg = () => {
                 backgroundImage: `url(${WaterTileImg})`,
                 backgroundSize: '25px',
                 opacity: '0.2',
-                animation: 'flow 10s linear infinite',
+                //animation: 'flow 10s linear infinite',
             }}
         ></div>
     );
