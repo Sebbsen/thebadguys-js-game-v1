@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import GameState from '../../state/GameManager';
 import MainTileAsset from '../../assets/lumberjack_hut_building.png';
 import { MyReactState } from '../../state/ReactContext';
-import GrassTileImg from '../../assets/grass_tile.png';
+
 
 const LumberjackHutTile = ({ id, coords }) => {
     const { dispatch, state } = useContext(MyReactState);
@@ -54,7 +54,7 @@ const LumberjackHutTile = ({ id, coords }) => {
             <img
                 width="100%"
                 height="auto"
-                src={GrassTileImg} 
+                src="./grass_tile.webp" 
                 style={{
                     opacity: .3,
                     imageRendering: "pixelated",

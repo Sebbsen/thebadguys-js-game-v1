@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GameState from '../../state/GameManager';
-import GrassTileImg from '../../assets/grass_tile.png';
+
 
 const GoldTile = ({id, coords}) => {
     const [entitiy, setEntity] = useState(GameState.getEntityById(id));
@@ -36,7 +36,7 @@ const GoldTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src={GrassTileImg} 
+                src="./grass_tile.webp" 
                 style={{
                     opacity: .8,
                     imageRendering: "pixelated",

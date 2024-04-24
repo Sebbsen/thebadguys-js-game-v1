@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GameState from '../../state/GameManager';
 
-import GrassTileImg from '../../assets/grass_tile.png';
-
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value
     const [entitiy, setEntity] = useState(GameState.getEntityById(id));
@@ -37,7 +35,7 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src={GrassTileImg}
+                src="./grass_tile.webp"
                 alt=""
                 style={{
                     opacity: .9,
@@ -47,7 +45,7 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://static.wikia.nocookie.net/ageofempires/images/c/c7/Trees_aoe2de.png"
+                src="./tree_tile.webp"
                 alt=""
                 style={{
                     position: "absolute",

@@ -1,5 +1,4 @@
 import React from 'react';
-import GrassTileImg from '../../assets/grass_tile.png';
 
 const BaseTile = () => {
     return (
@@ -14,7 +13,7 @@ const BaseTile = () => {
         <img
             width="100%"
             height="auto"
-            src={GrassTileImg}
+            src="./grass_tile.webp"
             style={{
                 opacity: .3,
             }} 

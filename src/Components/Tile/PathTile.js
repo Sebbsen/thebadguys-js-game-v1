@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainTileAsset from '../../assets/path_building.png';
 import GameState from '../../state/GameManager';
-import GrassTileImg from '../../assets/grass_tile.png';
+
 
 const PathTile = ({ id, coords }) => {
     const [neighbours, setNeighbours] = useState(['E', 'E', 'E', 'A ', 'E', 'E', 'E', 'E']);
@@ -42,7 +42,7 @@ const PathTile = ({ id, coords }) => {
             <img
                 width="100%"
                 height="auto"
-                src={GrassTileImg} 
+                src="./grass_tile.webp" 
                 style={{
                     opacity: .3,
                     imageRendering: "pixelated",

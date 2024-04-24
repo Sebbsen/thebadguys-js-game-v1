@@ -1,6 +1,6 @@
 import React from 'react';
 import MainTileAsset from '../../assets/iron_smelter_building.png';
-import GrassTileImg from '../../assets/grass_tile.png';
+
 
 const SawmillTile = () => {
     return (
@@ -15,7 +15,7 @@ const SawmillTile = () => {
             <img
                 width="100%"
                 height="auto"
-                src={GrassTileImg} 
+                src="./grass_tile.webp" 
                 style={{
                     opacity: .3,
                     imageRendering: "pixelated",
