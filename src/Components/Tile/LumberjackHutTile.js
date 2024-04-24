@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import GameState from '../../state/GameManager';
-import MainTileAsset from '../../assets/lumberjack_hut_building.png';
 import { MyReactState } from '../../state/ReactContext';
 
 
@@ -63,7 +62,7 @@ const LumberjackHutTile = ({ id, coords }) => {
             <img
                 width="100%"
                 height="auto"
-                src={MainTileAsset}
+                src='./lumberjack_hut_building.png'
                 style={{
                     position: "absolute",
                     zIndex: 1,

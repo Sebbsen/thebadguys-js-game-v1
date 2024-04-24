@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import MainTileAsset from '../../assets/path_building.png';
 import GameState from '../../state/GameManager';
 
 
@@ -66,7 +65,7 @@ const PathTile = ({ id, coords }) => {
             >
             </div>
             {neighbours.map((neighbour, index) => {
-                if (neighbour !== 'E' && neighbour !== 'W') {
+                if (['E', 'W', 'A'].includes(neighbour) === false) {
                     return (
                         <div
                             key={index}
@@ -81,7 +80,7 @@ const PathTile = ({ id, coords }) => {
                                 transformOrigin: "0% 0%",
                                 transform: `rotate(${180 - index * 90}deg) translate(-3.5px, -50%)`,
                                 fontSize: "4px",
-                                backgroundImage: `url(${MainTileAsset})`,
+                                backgroundImage: `url(./path_building.png)`,
                                 backgroundSize: "100% 100%",
                                 zIndex: 0,
                             }}

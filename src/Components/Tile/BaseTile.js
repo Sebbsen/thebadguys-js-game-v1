@@ -21,7 +21,7 @@ const BaseTile = () => {
         <img
             width="100%"
             height="auto"
-            src="https://static.wikia.nocookie.net/ageofempires/images/c/ca/House_sprite_aoe2de.png" 
+            src="./base_building.png" 
             style={{
                 position: "absolute",
                 zIndex: 1,

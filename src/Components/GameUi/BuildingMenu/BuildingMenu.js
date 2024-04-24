@@ -13,14 +13,6 @@ import CompassFactoryModel from '../../../models/CompassFactoryModel';
 
 import BuildingMenuImg from '../../../assets/buildingmenu.png';
 
-import LumberjackHutImg from '../../../assets/lumberjack_hut_building.png';
-import SawmillImg from '../../../assets/sawmill_building.png';
-import GoldSmelterImg from '../../../assets/gold_smelter_building.png';
-import IronSmelterImg from '../../../assets/iron_smelter_building.png';
-import MinercampImg from '../../../assets/minercamp_building.png';
-import CompassFactory from '../../../assets/factory_building.png';
-import PathImg from '../../../assets/path_building.png';
-
 export const BuildingMenu = () => {
   const { dispatch, state } = useContext(MyReactState);
   const { isBuilding } = state;
@@ -30,7 +22,7 @@ export const BuildingMenu = () => {
       buildingModel: PathModel,
       type: 'path',
       name: 'Path',
-      img: PathImg,
+      img: './path_building.png',
       tileType: 'P',
       buildResources: [
           {type: 'wood', cost: 5},
@@ -40,7 +32,7 @@ export const BuildingMenu = () => {
       buildingModel: LumberjackHutModel,
       type: 'lumberjackhut',
       name: 'Lumberjack Hut',
-      img: LumberjackHutImg,
+      img: './lumberjack_hut_building.png',
       tileType: 'L',
       buildResources: [
           {type: 'wood', cost: 13},
@@ -53,7 +45,7 @@ export const BuildingMenu = () => {
       buildingModel: SawmillModel,
       type: 'sawmill',
       name: 'Sawmill',
-      img: SawmillImg,
+      img: '././sawmill_building.png',
       tileType: 'S',
       buildResources: [
           {type: 'wood', cost: 40},
@@ -69,7 +61,7 @@ export const BuildingMenu = () => {
       buildingModel: MinercampModel,
       type: 'minercamp',
       name: 'Minercamp',
-      img: MinercampImg,
+      img: './minercamp_building.png',
       tileType: 'IM',
       buildResources: [
           {type: 'wood', cost: 5},
@@ -83,7 +75,7 @@ export const BuildingMenu = () => {
       buildingModel: IronSmelterModel,
       type: 'ironsmelter',
       name: 'Iron Smelter',
-      img: IronSmelterImg,
+      img: './iron_smelter_building.png',
       tileType: 'IS',
       buildResources: [
           {type: 'planks', cost: 40},
@@ -101,7 +93,7 @@ export const BuildingMenu = () => {
       buildingModel: GoldSmelterModel,
       type: 'goldsmelter',
       name: 'Gold Smelter',
-      img: GoldSmelterImg,
+      img: './gold_smelter_building.png',
       tileType: 'GS',
       buildResources: [
           {type: 'planks', cost: 40},
@@ -119,7 +111,7 @@ export const BuildingMenu = () => {
       buildingModel: CompassFactoryModel,
       type: 'compassfactory',
       name: 'Compass Factory',
-      img: CompassFactory,
+      img: './factory_building_v2.webp',
       tileType: 'CF',
       buildResources: [
           {type: 'planks', cost: 300},

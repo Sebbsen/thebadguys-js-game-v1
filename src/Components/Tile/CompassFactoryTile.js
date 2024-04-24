@@ -1,5 +1,4 @@
 import React from 'react';
-import MainTileAsset from '../../assets/factory_building.png';
 
 
 const CompassFactoryTile = () => {
@@ -34,9 +33,9 @@ const CompassFactoryTile = () => {
                 <img
                     width="100%"
                     height="auto"
-                    src={MainTileAsset}
+                    src='./factory_building_v2.webp'
                     style={{
-                        transform: "translate(1.1px, -8.2px) scale(1.35, 1.45)"
+                        transform: "translate(0.1px, -2.2px) scale(1.35)"
                     }}
                 />
             </div>

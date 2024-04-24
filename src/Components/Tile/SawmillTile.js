@@ -1,5 +1,4 @@
 import React from 'react';
-import MainTileAsset from '../../assets/sawmill_building.png';
 
 const SawmillTile = () => {
     return (
@@ -23,7 +22,7 @@ const SawmillTile = () => {
         <img
             width="100%"
             height="auto"
-            src="./grass_tile.webp"
+            src='./sawmill_building.png'
             style={{
                 position: "absolute",
                 zIndex: 1,

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import GameState from '../../state/GameManager';
-import MainTileAsset from '../../assets/minercamp_building.png';
 import { MyReactState } from '../../state/ReactContext';
 
 
@@ -73,9 +72,9 @@ const MinercampTile = ({ id, coords }) => {
                 <img
                     width="100%"
                     height="auto"
-                    src={MainTileAsset}
+                    src='./minercamp_building.png'
                     style={{
-                        transform: "translate(0px, -4.6px) scale(1.05)"
+                        transform: "translate(-2px, 1.4px) scale(0.75)"
                     }}
                 />
             </div>

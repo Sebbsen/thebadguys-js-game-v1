@@ -30,7 +30,7 @@ export const Map = ({children}) => {
 
     // zoom and pan
     const [scale, setScale] = useState(3.5);
-    const [translate, setTranslate] = useState({ x: 0, y: 0 });
+    const [translate, setTranslate] = useState({ x: -11, y: -22 });
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -42,16 +42,16 @@ export const Map = ({children}) => {
                     setScale(prevScale => prevScale - 0.5);
                     break;
                 case 'ArrowRight':
-                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 5 }));
+                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 3 }));
                     break;
                 case 'ArrowLeft':
-                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x + 5 }));
+                    setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x + 3 }));
                     break;
                 case 'ArrowUp':
-                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y + 5 }));
+                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y + 3 }));
                     break;
                 case 'ArrowDown':
-                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y - 5 }));
+                    setTranslate(prevTranslate => ({ ...prevTranslate, y: prevTranslate.y - 3 }));
                     break;
                 default:
                     break;
@@ -69,8 +69,8 @@ export const Map = ({children}) => {
 
   return (
     <div style={{
-        transform: `translate(${translate.x}%, ${translate.y}%) scale(${scale})`,
-        transition: 'transform 0.1s',
+        transform: `scale(${scale}) translate(${translate.x}%, ${translate.y}%)`,
+        transition: 'transform 0.2s',
     }}>
         <div style={{
             position: "relative",

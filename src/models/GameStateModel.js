@@ -6,7 +6,7 @@ class GameStateModel {
             tileSize: 0
         };
         this.resources = {
-            wood: 10,
+            wood: 50,
             planks: 0,
             iron: 0,
             gold: 0,
@@ -61,11 +61,12 @@ class GameStateModel {
     }
 
     editMap(coords, letter) {
+        
         //TODO: i think x,y are switched
         const x = coords[0];
         const y = coords[1];
         
-        if (x >= 0 && x < this.map.mapSize/this.map.tileSize && y >= 0 && y < this.map.mapSize/this.map.tileSize) { // check if coords are within map
+        if (x >= 0 && x < this.map.mapSize && y >= 0 && y < this.map.mapSize) { // check if coords are within map
             
             const oldTile = this.map.mapMatrix[x][y];
             const newTile = letter;
@@ -90,7 +91,7 @@ class GameStateModel {
             const surroundingCord = [];
             surroundingCord[0] = parseFloat(x) + parseFloat(offset[0]);
             surroundingCord[1] = parseFloat(y) + parseFloat(offset[1]);
-            if (surroundingCord[0] >= 0 && surroundingCord[0] < this.map.mapSize/this.map.tileSize && surroundingCord[1] >= 0 && surroundingCord[1] < this.map.mapSize/this.map.tileSize) {
+            if (surroundingCord[0] >= 0 && surroundingCord[0] < this.map.mapSize && surroundingCord[1] >= 0 && surroundingCord[1] < this.map.mapSize) {
                 neighbours.push(this.map.mapMatrix[surroundingCord[0]][surroundingCord[1]]);
             } else {
                 neighbours.push('E');

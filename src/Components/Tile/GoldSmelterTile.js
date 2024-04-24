@@ -1,5 +1,4 @@
 import React from 'react';
-import MainTileAsset from '../../assets/gold_smelter_building.png';
 
 
 const GoldSmelterTile = () => {
@@ -34,7 +33,7 @@ const GoldSmelterTile = () => {
                 <img
                     width="100%"
                     height="auto"
-                    src={MainTileAsset}
+                    src='./gold_smelter_building.png'
                     style={{
                         transform: "translate(1.6px, -8.6px) scale(1.55)"
                     }}
