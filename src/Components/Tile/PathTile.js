@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainTileAsset from '../../assets/path_building.png';
 import GameState from '../../state/GameManager';
+import GrassTileImg from '../../assets/grass_tile.png';
 
 const PathTile = ({ id, coords }) => {
     const [neighbours, setNeighbours] = useState(['E', 'E', 'E', 'A ', 'E', 'E', 'E', 'E']);
@@ -41,9 +42,10 @@ const PathTile = ({ id, coords }) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg"
+                src={GrassTileImg} 
                 style={{
                     opacity: .3,
+                    imageRendering: "pixelated",
                 }}
             />
             <div

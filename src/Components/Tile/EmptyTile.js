@@ -1,4 +1,5 @@
 import React from 'react';
+import GrassTileImg from '../../assets/grass_tile.png';
 
 const EmptyTile = () => {
     return (
@@ -12,8 +13,9 @@ const EmptyTile = () => {
             <img
                 width="100%"
                 height="auto"
-                src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg" 
+                src={GrassTileImg} 
                 style={{
+                    imageRendering: "pixelated",
                     opacity: .3,
                 }} 
             />   

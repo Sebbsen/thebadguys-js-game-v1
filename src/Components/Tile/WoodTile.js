@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import GameState from '../../state/GameManager';
 
+import GrassTileImg from '../../assets/grass_tile.png';
+
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value
     const [entitiy, setEntity] = useState(GameState.getEntityById(id));
@@ -35,10 +37,11 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg"
+                src={GrassTileImg}
                 alt=""
                 style={{
                     opacity: .9,
+                    imageRendering: "pixelated",
                 }} 
             />
             <img

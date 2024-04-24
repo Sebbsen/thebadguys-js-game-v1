@@ -1,5 +1,6 @@
 import React from 'react';
 import MainTileAsset from '../../assets/sawmill_building.png';
+import GrassTileImg from '../../assets/grass_tile.png';
 
 const SawmillTile = () => {
     return (
@@ -14,9 +15,10 @@ const SawmillTile = () => {
         <img
             width="100%"
             height="auto"
-            src="https://www.textures.com/system/gallery/photos/Nature/Grass/50178/Grass0140_1_350.jpg" 
+            src={GrassTileImg}  
             style={{
                 opacity: .3,
+                imageRendering: "pixelated",
             }} 
         />
         <img
