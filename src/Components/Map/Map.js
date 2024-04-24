@@ -6,7 +6,7 @@ import GameState from '../../state/GameManager';
 export const Map = ({children}) => {
     const [map, setMap] = useState(GameState.getMap());
     const tileSize = `${map.tileSize}px`;
-    const mapSize = `${map.mapSize}px`;
+    const mapSize = `${map.mapSize * map.tileSize}px`;
     const mapMatrix = map.mapMatrix;
 
     useEffect(() => {

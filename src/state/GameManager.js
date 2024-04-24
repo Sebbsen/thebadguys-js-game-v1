@@ -1,13 +1,21 @@
 import GameStateModel from '../models/GameStateModel';
-import mapMatrix from '../assets/mapMatrix32.json';
+import mapMatrixBackup from '../assets/mapMatrix64.json';
+import mapImg64_1 from '../assets/mapImg64_1.png';
+import mapImg128_1 from '../assets/mapImg128_1.png';
 import { getEntities } from '../services/entitiesFactory';
+import { imgToMapMatrix } from '../services/utils';
 
 
 const GameState = new GameStateModel();
-
-GameState.setEntities(getEntities(mapMatrix));
-GameState.initMap(mapMatrix, 800, 25);
-GameState.startCheckForAutoWork();
+const mapImg = new Image();
+mapImg.src = mapImg64_1;
+//debugger
+mapImg.onload = () => { 
+    const mapMatrix = imgToMapMatrix(mapImg);
+    GameState.setEntities(getEntities(mapMatrix));
+    GameState.initMap(mapMatrix, mapImg.width, 25);
+    GameState.startCheckForAutoWork();
+}
 
 // Export the instance to make it available to other components
 export default GameState;
