@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Tile from '../Tile/Tile';
 import GameState from '../../state/GameManager';
-import WaterTileImg from '../../assets/water_tile.png';
 import WaterBg from './WaterBg';
 
 
@@ -32,14 +31,51 @@ export const Map = ({children}) => {
     const [scale, setScale] = useState(3.5);
     const [translate, setTranslate] = useState({ x: -11, y: -22 });
 
+ 
+
     useEffect(() => {
+        const setLowLOD = () => {
+            let mapTiles = document.querySelectorAll('#map .tile img')
+            mapTiles.forEach(el => {
+                el.classList.add('hide')
+            })
+        }
+        
+        const setHighLOD = () => {
+            let mapTiles = document.querySelectorAll('#map .tile img')
+            mapTiles.forEach(el => {
+                el.classList.remove('hide')
+            })
+        }
+
         const handleKeyDown = (event) => {
             switch (event.key) {
                 case '+':
-                    setScale(prevScale => prevScale + 0.5);
+                    setScale(prevScale => {
+                        if (prevScale == 1.5) {
+                            setHighLOD()
+                        } 
+
+                        if (prevScale < 4) {
+                            return prevScale + 0.5;
+                        } else {
+                            return 4;
+                        }
+                    });
                     break;
                 case '-':
-                    setScale(prevScale => prevScale - 0.5);
+                    setScale(prevScale => {
+                        if (prevScale-0.5 == 1.5) {
+                            setLowLOD()
+                        }
+                       
+
+                        if (prevScale > 1) {
+                            return prevScale - 0.5;
+                        } else {
+                            return 1;
+                        }
+                    });
                     break;
                 case 'ArrowRight':
                     setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 3 }));
@@ -64,6 +100,12 @@ export const Map = ({children}) => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+
+
+    
+
+
+
   
   
 
@@ -72,7 +114,7 @@ export const Map = ({children}) => {
         transform: `scale(${scale}) translate(${translate.x}%, ${translate.y}%)`,
         transition: 'transform 0.2s',
     }}>
-        <div style={{
+        <div id="map" style={{
             position: "relative",
             gridTemplate: `repeat(auto-fill, ${tileSize}) / repeat(auto-fill, ${tileSize})`,
             width: mapSize,

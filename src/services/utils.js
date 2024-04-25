@@ -41,3 +41,14 @@ function convertToMatrix(ctx, width, height, colorMap) {
     }
     return matrix;
 }
+
+export const isElementInViewport = (el) => {
+    var rect = el.getBoundingClientRect();
+    let bufferZone = 300
+    return (
+        rect.top >= -bufferZone &&
+        rect.left >= -bufferZone &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + bufferZone &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) + bufferZone
+    );
+}
