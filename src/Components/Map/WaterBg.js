@@ -1,5 +1,4 @@
 import React from 'react';
-import WaterTileImg from '../../assets/water_tile.png';
 import './WaterBg.css';
 
 const WaterBg = () => {
@@ -14,7 +13,7 @@ const WaterBg = () => {
                 top: '-8000px',
                 left: '-8000px',
                 imageRendering: 'pixelated',
-                backgroundImage: `url(${WaterTileImg})`,
+                backgroundImage: `url(./water_tile.png  )`,
                 backgroundSize: '25px',
                 opacity: '0.2',
                 //animation: 'flow 10s linear infinite',
