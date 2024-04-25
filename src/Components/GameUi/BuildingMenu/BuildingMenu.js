@@ -35,7 +35,7 @@ export const BuildingMenu = () => {
       img: './lumberjack_hut_building.png',
       tileType: 'L',
       buildResources: [
-          {type: 'wood', cost: 13},
+          {type: 'wood', cost: 25},
       ],
       productionOutput: [
         {type: 'wood', cost: 1},
@@ -96,8 +96,8 @@ export const BuildingMenu = () => {
       img: './gold_smelter_building.png',
       tileType: 'GS',
       buildResources: [
-          {type: 'planks', cost: 40},
-          {type: 'gold', cost: 30},
+          {type: 'planks', cost: 45},
+          {type: 'gold', cost: 35},
       ],
       productionInput: [
         {type: 'wood', cost: 1},

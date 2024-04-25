@@ -44,7 +44,7 @@ class LumberjackHutModel {
             if (random <= 0.02) {
                 GameState.editMap(myWoodModel.coords, 'G');
                 GameState.addEntity(new GoldModel({ id: myWoodModel.id }));
-            } else if (random > 0.1 && random <= 0.15) {
+            } else if (random > 0.1 && random <= 0.12) {
                 GameState.editMap(myWoodModel.coords, 'I');
                 GameState.addEntity(new IronModel({ id: myWoodModel.id }));
             } else {

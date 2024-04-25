@@ -38,9 +38,9 @@ export const DismantleBuilding = ({buildingTypes = []}) => {
             if (entity) {
                 const buildingType = buildingTypes.find(b => b.type === entity.type);
                 if (buildingType) {
-                    // Give back the resources
+                    // Give half back the resources
                     buildingType.buildResources.forEach(resource => {
-                        GameState.changeResource(resource.type, resource.cost);
+                        GameState.changeResource(resource.type, Math.floor(resource.cost / 2));
                     });
 
                     // Remove the building
