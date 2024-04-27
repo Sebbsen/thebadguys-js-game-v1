@@ -52,3 +52,25 @@ export const isElementInViewport = (el) => {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth) + bufferZone
     );
 }
+
+/**
+ * Simuliert einen Tastendruck im Browser.
+ * 
+ * @param {string} key - Der Name der Taste (z.B. "Escape", "Enter").
+ * @param {string} code - Der Code der Taste (z.B. "Escape", "Enter").
+ * @param {number} keyCode - Der numerische KeyCode der Taste (z.B. 27 für Escape).
+ */
+
+export const simulateKeyPress = (key, code, keyCode) => {
+    // Erstellen eines neuen KeyboardEvent
+    const event = new KeyboardEvent('keydown', {
+        key: key,
+        code: code,
+        keyCode: keyCode,
+        charCode: 0,
+        bubbles: true
+    });
+
+    // Auslösen des Events
+    document.dispatchEvent(event);
+  }

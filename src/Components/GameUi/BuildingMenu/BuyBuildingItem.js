@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import GameState from '../../../state/GameManager';
 import { MyReactState } from '../../../state/ReactContext';
 
+import { simulateKeyPress } from '../../../services/utils';
+
 export const BuyBuildingItem = ({
     buildingModel,
     type = '',
@@ -19,6 +21,7 @@ export const BuyBuildingItem = ({
     const [mouseOver, setMouseOver] = useState(false);
 
     const handleBuyBuilding = () => {
+        simulateKeyPress('Escape', 'Escape', 27);
         dispatch({ type: 'updateIsBuilding', payload: type });
     };
 

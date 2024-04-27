@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import GameState from '../../../state/GameManager';
 import { MyReactState } from '../../../state/ReactContext';
+import { simulateKeyPress } from '../../../services/utils';
 
 import DismantleIcon from '../../../assets/dismantle_icon.png';
 import './DismantleBuilding.css'
@@ -11,6 +12,7 @@ export const DismantleBuilding = ({buildingTypes = []}) => {
     const [dismantleClicked, setDismantleClicked] = useState(false);
 
     const handleDismantleBuilding = () => {
+        simulateKeyPress('Escape', 'Escape', 27);
         setDismantleClicked(!dismantleClicked);
         dispatch({ type: 'updateIsDismantling', payload: !dismantleClicked });
     };
