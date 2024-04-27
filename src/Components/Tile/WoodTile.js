@@ -4,6 +4,7 @@ import GameState from '../../state/GameManager';
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value
     const [entitiy, setEntity] = useState(GameState.getEntityById(id));
+    const [treeImage, setTreeImage] = useState('./tree_tile_state1.webp');
     const harvestInterval = useRef();
 
     useEffect(() => {
@@ -23,6 +24,19 @@ const WoodTile = ({id, coords}) => {
             GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
         };
     }, [id, entitiy?.id]);
+    
+
+    useEffect(() => {
+        let imageSrc = '';
+        if (entitiy.remainingResource === 50) {
+            imageSrc = './tree_tile_state1.webp';
+        } else if (entitiy.remainingResource < 50 && entitiy.remainingResource > 25) {
+            imageSrc = './tree_tile_state2.webp';
+        } else {
+            imageSrc = './tree_tile_state3.webp';
+        }
+        setTreeImage(imageSrc);
+    }, [entitiy]);
 
     const manualHarvest = () => {
         harvestInterval.current = setInterval(() => {
@@ -60,7 +74,7 @@ const WoodTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="./tree_tile.webp"
+                src={treeImage}
                 alt=""
                 style={{
                     position: "absolute",
