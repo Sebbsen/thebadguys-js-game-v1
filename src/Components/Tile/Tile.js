@@ -80,7 +80,7 @@ const Tile = ({ tileType, id, coords }) => {
 
     return (
         <div 
-            className={`tile ${isDismantling ? 'tile--is-dismantling' : ''}`}
+            className={`tile`}
             data-coords={id} 
             style={{width: "100%", height: "100%"}}
             onClick={handleTileClick}

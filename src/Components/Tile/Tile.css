@@ -5,7 +5,7 @@
     opacity: 0.5;
 }
 
-.tile--is-dismantling:hover::before {
+.is-dismantling .tile:hover::before {
     content: '';
     position: absolute;
     top: 0;
