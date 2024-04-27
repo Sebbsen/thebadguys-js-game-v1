@@ -19,7 +19,8 @@ const WoodTile = ({id, coords}) => {
 
         // removeObserver if component is unmounted
         return () => {
-        GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
+            clearInterval(harvestInterval.current);
+            GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
         };
     }, [id, entitiy?.id]);
 

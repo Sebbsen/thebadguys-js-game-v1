@@ -83,7 +83,7 @@ export const BuyBuildingItem = ({
         <div
         className='hover_ani'
             style={{
-                padding: '10px',
+                padding: '10px 0',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
@@ -98,8 +98,9 @@ export const BuyBuildingItem = ({
                 src={img}
                 alt={name}
                 style={{
-                    width: '50px',
-                    height: '50px',
+                    width: '70px',
+                    height: '70px',
+                    objectFit: 'contain',
                 }}
             />
                 <div>
