@@ -35,7 +35,7 @@ const GoldSmelterTile = () => {
                     height="auto"
                     src='./gold_smelter_building.png'
                     style={{
-                        transform: "translate(1.6px, -8.6px) scale(1.55)"
+                        transform: "translate(-1px, -1.6px) scale(1.25)"
                     }}
                 />
             </div>

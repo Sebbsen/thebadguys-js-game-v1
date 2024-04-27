@@ -35,7 +35,7 @@ const SawmillTile = () => {
                     height="auto"
                     src='./iron_smelter_building.png'
                     style={{
-                        transform: "translate(0px, -4.6px) scale(1.05)"
+                        transform: "translate(-1px, -1.6px) scale(1.25)"
                     }}
                 />
             </div>
