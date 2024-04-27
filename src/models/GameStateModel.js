@@ -1,3 +1,6 @@
+import GoldModel from './GoldModel';
+import IronModel from './IronModel';
+
 class GameStateModel {
     constructor() {
         this.map = {
@@ -193,6 +196,26 @@ class GameStateModel {
                 entity.checkForAutoWork();
             }
         });
+    }
+
+    // actions
+    HarvestWood(id, productionRate) {
+        const myWoodModel = this.getEntityById(id);
+        this.editEntity(myWoodModel, 'remainingResource', myWoodModel.remainingResource - productionRate);
+        this.addWood(productionRate);
+        if (myWoodModel.remainingResource <= 0) {
+            this.removeEntity(myWoodModel);
+            const random = Math.random();
+            if (random <= 0.02) {
+                this.editMap(myWoodModel.coords, 'G');
+                this.addEntity(new GoldModel({ id: myWoodModel.id }));
+            } else if (random > 0.1 && random <= 0.12) {
+                this.editMap(myWoodModel.coords, 'I');
+                this.addEntity(new IronModel({ id: myWoodModel.id }));
+            } else {
+                this.editMap(myWoodModel.coords, 'E');
+            }
+        }
     }
 }
 

@@ -36,21 +36,7 @@ class LumberjackHutModel {
             return
         }
 
-        GameState.editEntity(myWoodModel, 'remainingResource', myWoodModel.remainingResource - this.productionRate);
-        GameState.addWood(this.productionRate);
-        if (myWoodModel.remainingResource <= 0) {
-            GameState.removeEntity(myWoodModel);
-            const random = Math.random();
-            if (random <= 0.02) {
-                GameState.editMap(myWoodModel.coords, 'G');
-                GameState.addEntity(new GoldModel({ id: myWoodModel.id }));
-            } else if (random > 0.1 && random <= 0.12) {
-                GameState.editMap(myWoodModel.coords, 'I');
-                GameState.addEntity(new IronModel({ id: myWoodModel.id }));
-            } else {
-                GameState.editMap(myWoodModel.coords, 'E');
-            }
-        }
+        GameState.HarvestWood(myWoodModel.id, this.productionRate);
     }
 
     startWork() {
