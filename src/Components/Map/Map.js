@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Tile from '../Tile/Tile';
 import GameState from '../../state/GameManager';
 import WaterBg from './WaterBg';
+import { FrustumCulling } from '../../services/utils';
 
 
 export const Map = ({children}) => {
@@ -49,6 +50,7 @@ export const Map = ({children}) => {
         }
     
         const handleScroll = (event) => {
+            FrustumCulling();
             const direction = event.deltaY > 0 ? '-' : '+';
             switch (direction) {
                 case '+':
@@ -83,6 +85,7 @@ export const Map = ({children}) => {
         };
 
         const handleKeyDown = (event) => {
+            FrustumCulling()
             switch (event.key) {
                 case 'ArrowRight':
                     setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 3 }));

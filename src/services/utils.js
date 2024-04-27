@@ -73,4 +73,26 @@ export const simulateKeyPress = (key, code, keyCode) => {
 
     // Auslösen des Events
     document.dispatchEvent(event);
-  }
+}
+
+export const FrustumCulling = () => {
+    let mapTiles = document.querySelectorAll('#map > div')
+
+    mapTiles.forEach(el => {
+        if(!el.firstChild) {
+            return
+        }
+        if(!isElementInViewport(el)) {
+            el.firstChild.classList.add('hide')
+        } else {
+            el.firstChild.classList.remove('hide')
+        }
+    })
+}
+
+export const startFrustumCullingIntervall = () => {
+    // hide tiles out of camera (Frustum Culling)
+    setInterval(()=>{
+        FrustumCulling();
+    }, 500)
+}
