@@ -47,15 +47,16 @@ export const Map = ({children}) => {
                 el.classList.remove('hide')
             })
         }
-
-        const handleKeyDown = (event) => {
-            switch (event.key) {
+    
+        const handleScroll = (event) => {
+            const direction = event.deltaY > 0 ? '-' : '+';
+            switch (direction) {
                 case '+':
                     setScale(prevScale => {
                         if (prevScale == 1.5) {
                             setHighLOD()
                         } 
-
+    
                         if (prevScale < 4) {
                             return prevScale + 0.5;
                         } else {
@@ -68,8 +69,7 @@ export const Map = ({children}) => {
                         if (prevScale-0.5 == 1.5) {
                             setLowLOD()
                         }
-                       
-
+    
                         if (prevScale > 1) {
                             return prevScale - 0.5;
                         } else {
@@ -77,6 +77,13 @@ export const Map = ({children}) => {
                         }
                     });
                     break;
+                default:
+                    break;
+            }
+        };
+
+        const handleKeyDown = (event) => {
+            switch (event.key) {
                 case 'ArrowRight':
                     setTranslate(prevTranslate => ({ ...prevTranslate, x: prevTranslate.x - 3 }));
                     break;
@@ -94,25 +101,19 @@ export const Map = ({children}) => {
             }
         };
 
+    
+        window.addEventListener('wheel', handleScroll);
         window.addEventListener('keydown', handleKeyDown);
-
         return () => {
+            window.removeEventListener('wheel', handleScroll);
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
 
-
-    
-
-
-
-  
-  
-
   return (
     <div style={{
         transform: `scale(${scale}) translate(${translate.x}%, ${translate.y}%)`,
-        transition: 'transform 0.2s',
+        transition: 'transform 0.1s',
     }}>
         <div id="map" style={{
             position: "relative",
