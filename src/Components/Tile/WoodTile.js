@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import GameState from '../../state/GameManager';
 
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value
     const [entitiy, setEntity] = useState(GameState.getEntityById(id));
+    const harvestInterval = useRef();
 
     useEffect(() => {
         // What to do when the observer is triggered
@@ -22,15 +23,28 @@ const WoodTile = ({id, coords}) => {
         };
     }, [id, entitiy?.id]);
 
+    const manualHarvest = () => {
+        harvestInterval.current = setInterval(() => {
+            GameState.HarvestWood(id,1);
+        },1000);
+    }
+
+    const cancelHarvest = () => {
+        clearInterval(harvestInterval.current);
+        console.log('cancelHarvest');
+    }
+
     return (
         //console.log('rerender wood:', entitiy?.id),
         <div
-        style={{
-            backgroundColor: "#416626",
-            width: "100%",
-            height: "100%",
-            position: "relative",
-        }}
+            style={{
+                backgroundColor: "#416626",
+                width: "100%",
+                height: "100%",
+                position: "relative",
+            }}
+            onMouseDown={manualHarvest}
+            onMouseUp={cancelHarvest}
         >
             <img
                 width="100%"
