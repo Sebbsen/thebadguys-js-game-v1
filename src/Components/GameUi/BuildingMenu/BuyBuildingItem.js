@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import GameState from '../../../state/GameManager';
 import { MyReactState } from '../../../state/ReactContext';
 
-
 export const BuyBuildingItem = ({
     buildingModel,
     type = '',
@@ -13,76 +12,92 @@ export const BuyBuildingItem = ({
     productionInput = [],
     productionOutput = []
 }) => {
-
     const { dispatch, state } = useContext(MyReactState);
-    const { tileClickedCoords } = state;
-    const { isBuilding } = state;
+    const { tileClickedCoords, isBuilding } = state;
 
     const [isSelected, setIsSelected] = useState(false);
+    const [mouseOver, setMouseOver] = useState(false);
 
     const handleBuyBuilding = () => {
         dispatch({ type: 'updateIsBuilding', payload: type });
     };
 
-
-    // set isBuilding to false when escape key is pressed
     const handleKeyDown = (event) => {
         if (event.key === 'Escape' && isBuilding) {
             dispatch({ type: 'updateIsBuilding', payload: '' });
         }
     };
 
-    // listen for escape key press
     useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
-        // Remove event listener when component unmounts
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isBuilding]);
 
-
     useEffect(() => {
         if (isBuilding === type) {
-            // Check if the tile is occupied
             if (GameState.getEntityById(tileClickedCoords.coords)) {
                 dispatch({ type: 'showAlert', payload: 'Tile is occupied' });
                 return;
             }
             const currentResources = GameState.getResources();
-
-            // Check if the player has enough of each resource
             const hasAllResources = buildResources.every(resource =>
                 currentResources[resource.type] >= resource.cost
             );
 
             if (hasAllResources) {
-                // Deduct the cost of each resource
                 buildResources.forEach(resource => {
                     GameState.changeResource(resource.type, -resource.cost);
                 });
-
-                // Proceed with building
                 const newBuildingModel = new buildingModel({ id: tileClickedCoords.coords });
                 GameState.addEntity(newBuildingModel);
-
                 if (newBuildingModel.checkForAutoWork) {
                     newBuildingModel.checkForAutoWork();
                 }
-
                 GameState.editMap(tileClickedCoords.coords.split('-'), tileType);
             } else {
-                // Not enough resources alert
                 dispatch({ type: 'showAlert', payload: 'Not enough resources' });
-                return;
             }
         }
     }, [tileClickedCoords]);
 
+    const renderResourceList = (resources, spritePosition) => (
+        resources.map((resource, index) => (
+            <div key={index} style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '2px'
+            }}>
+                <div style={{
+                    width: '32px',
+                    height: '32px',
+                    display: 'inline-block',
+                    backgroundImage: `url(./32x32_icon_sprite.png)`,
+                    backgroundPosition: `-${spritePosition[resource.type]}px 0px`,
+                    backgroundSize: '224px'
+                }}></div>
+                <span> {resource.cost}</span>
+            </div>
+        ))
+    );
+
+    const spritePosition = {
+        wood: 0,
+        planks: 32,
+        iron: 64,
+        gold: 96,
+        ironIngots: 128,
+        goldIngots: 160,
+        compasses: 192,
+    };
+
     return (
         <div
-        className='hover_ani'
+            className='hover_ani'
             style={{
+                position: 'relative',
                 padding: '10px 0',
                 cursor: 'pointer',
                 display: 'flex',
@@ -93,41 +108,45 @@ export const BuyBuildingItem = ({
                 opacity: isBuilding && isBuilding !== type ? '0.5' : '1',
             }}
             onClick={handleBuyBuilding}
+            onMouseEnter={() => setMouseOver(true)}
+            onMouseLeave={() => setMouseOver(false)}
         >
-            <img
-                src={img}
-                alt={name}
-                style={{
-                    width: '70px',
-                    height: '70px',
-                    objectFit: 'contain',
-                }}
-            />
-                <div>
-                    <div>{name}</div>
-                    <div style={{
-                        display: 'none'
-                    }}>
-                        <div>
-                            Costs:
-                            {buildResources.map((resource, index) => (
-                                <div key={index}>{resource.type}: {resource.cost}</div>
-                            ))}
-                        </div>
-                        <div>
-                            Input:
-                            {productionInput.map((input, index) => (
-                                <div key={index}>{input.type}: {input.cost}</div>
-                            ))}
-                        </div>
-                        <div>
-                            Output:
-                            {productionOutput.map((output, index) => (
-                                <div key={index}>{output.type}: {output.cost}</div>
-                            ))}
-                        </div>
+            <img src={img} alt={name} style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
+            <div style={{
+                opacity: mouseOver ? '1' : '0',
+                position: 'absolute',
+                bottom: '129px',
+                left: '50%',
+                width: '220px',
+                height: '290px',
+                transform: 'translateX(-50%)',
+                padding: '45px 20px',
+                background: 'url(./buildmenuinfobg.png)',
+                backgroundSize: 'cover',
+                pointerEvents: 'none',
+                transition: 'opacity 0.1s',
+            }}>
+                <div style={{display: productionInput.length > 1 ? '' : 'none',}}>
+                    <span style={{ opacity: 0.4, }}>Input:</span>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+                        {renderResourceList(productionInput, spritePosition)}
                     </div>
                 </div>
+                <hr style={{border: '1px solid rgba(0,0,0,0.1)'}} />
+                <div>
+                    <span style={{ opacity: 0.4, }}>Output:</span>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px'  }}>
+                        {renderResourceList(productionOutput, spritePosition)}
+                    </div>
+                </div>
+                <hr style={{border: '1px solid rgba(0,0,0,0.1)'}} />
+                <div>
+                    <span style={{ opacity: 0.4, }}>Building Costs:</span>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px'  }}>
+                        {renderResourceList(buildResources, spritePosition)}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
