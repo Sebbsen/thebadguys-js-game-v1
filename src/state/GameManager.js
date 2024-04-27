@@ -10,12 +10,14 @@ const GameState = new GameStateModel();
 const mapImg = new Image();
 mapImg.src = mapImg64_1;
 //debugger
-mapImg.onload = () => { 
+export const loadMap = () => {
     const mapMatrix = imgToMapMatrix(mapImg);
     GameState.setEntities(getEntities(mapMatrix));
     GameState.initMap(mapMatrix, mapImg.width, 25);
     GameState.startCheckForAutoWork();
 }
+
+
 
 // Export the instance to make it available to other components
 export default GameState;
