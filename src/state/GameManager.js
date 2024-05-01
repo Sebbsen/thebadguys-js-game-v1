@@ -9,13 +9,17 @@ import { imgToMapMatrix } from '../services/utils';
 const GameState = new GameStateModel();
 const mapImg = new Image();
 mapImg.src = mapImg64_1;
-//debugger
+
 export const loadMap = () => {
     const mapMatrix = imgToMapMatrix(mapImg);
     GameState.setEntities(getEntities(mapMatrix));
     GameState.initMap(mapMatrix, mapImg.width, 25);
     GameState.startCheckForAutoWork();
 }
+
+setTimeout(() => {
+    loadMap();
+},)
 
 
 
