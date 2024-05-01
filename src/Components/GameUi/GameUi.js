@@ -1,6 +1,7 @@
 import React from 'react';
 import { BuildingMenu } from './BuildingMenu/BuildingMenu';
 import { StatusBar } from './StatusBar/StatusBar';
+import { Audio } from './Audio';
 
 export const GameUi = () => {
   return (
@@ -13,6 +14,7 @@ export const GameUi = () => {
       zIndex: 1000,
       pointerEvents: 'none',
     }}>
+      <Audio />
       <StatusBar />
       <BuildingMenu />
     </div>
