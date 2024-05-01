@@ -22,7 +22,7 @@ class SawmillModel {
             const resources = GameState.getResources();
             const wood = resources['wood'];
             if (wood >= 1) {
-                GameState.changeResource('wood', -1);
+                GameState.changeResource('wood', -2);
                 GameState.changeResource('planks', this.productionRate);
             }
         }, 1000);

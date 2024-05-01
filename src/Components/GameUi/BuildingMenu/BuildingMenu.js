@@ -51,10 +51,10 @@ export const BuildingMenu = () => {
           {type: 'wood', cost: 40},
       ],
       productionInput: [
-        {type: 'wood', cost: 1},
+        {type: 'wood', cost: 2},
       ],
       productionOutput: [
-        {type: 'Planks', cost: 1},
+        {type: 'planks', cost: 1},
       ],
     },
     {
