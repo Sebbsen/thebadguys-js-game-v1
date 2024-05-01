@@ -85,21 +85,6 @@ const WoodTile = ({id, coords}) => {
                     transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1) translate(-2px, -6px)"
                 }} 
             />
-                <div style={
-                    {
-                        position: "absolute",
-                        zIndex: 2,
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "0.5rem",
-                    }
-                
-                }>
-                    {entitiy?.remainingResource || "E"}
-                </div>
         </div>
     );
 };

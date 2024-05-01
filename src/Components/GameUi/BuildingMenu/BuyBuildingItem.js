@@ -95,6 +95,7 @@ export const BuyBuildingItem = ({
         goldIngots: 160,
         compasses: 192,
     };
+    
 
     return (
         <div
@@ -109,16 +110,18 @@ export const BuyBuildingItem = ({
                 gap: '10px',
                 textAlign: 'center',
                 opacity: isBuilding && isBuilding !== type ? '0.5' : '1',
+                height: '100%',
             }}
             onClick={handleBuyBuilding}
             onMouseEnter={() => setMouseOver(true)}
             onMouseLeave={() => setMouseOver(false)}
         >
             <img src={img} alt={name} style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
+            {name}
             <div style={{
                 opacity: mouseOver ? '1' : '0',
                 position: 'absolute',
-                bottom: '129px',
+                bottom: '152px',
                 left: '50%',
                 width: '220px',
                 height: '290px',
@@ -129,7 +132,7 @@ export const BuyBuildingItem = ({
                 pointerEvents: 'none',
                 transition: 'opacity 0.1s',
             }}>
-                <div style={{display: productionInput.length > 1 ? '' : 'none',}}>
+                <div style={{display: productionInput.length > 0 ? '' : 'none',}}>
                     <span style={{ opacity: 0.4, }}>Input:</span>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                         {renderResourceList(productionInput, spritePosition)}
