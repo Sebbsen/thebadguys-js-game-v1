@@ -52,23 +52,23 @@ const WoodTile = ({id, coords}) => {
     }
 
     useEffect(() => {
-    const intervalId = setInterval(() => {
-        const currentEntity = GameState.getEntityById(id);
-        if (currentEntity && currentEntity.remainingResource < currentEntity.totalResource && currentEntity.remainingResource !== prevResource) {
-            setShowVillager(true);
-            setPrevResource(currentEntity.remainingResource);
-        } else {
-            setShowVillager(false);
-        }
-        if(id ==='57-50') {
-        }
-    }, 3000 * Math.random() + 1500);
+        const intervalId = setInterval(() => {
+            const currentEntity = GameState.getEntityById(id);
+            if (currentEntity && currentEntity.remainingResource < currentEntity.totalResource && currentEntity.remainingResource !== prevResource) {
+                setShowVillager(true);
+                setPrevResource(currentEntity.remainingResource);
+            } else {
+                setShowVillager(false);
+            }
+            if(id ==='57-50') {
+            }
+        }, 3000 * Math.random() + 1500);
 
-    // Cleanup function
-    return () => {
-        clearInterval(intervalId);
-    };
-}, [id,prevResource]);
+        // Cleanup function
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [id,prevResource]);
 
     return (
         <div
@@ -99,7 +99,7 @@ const WoodTile = ({id, coords}) => {
                     top: 0,
                     left: 0,
                     width: '65%',
-                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1) translate(-4px, 0px)",
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(-1.1, 3.1) translate(-4px, 0px)",
                 }}
             />}
             <img  
