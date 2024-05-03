@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import GameState from '../../state/GameManager';
 
-
 const GoldTile = ({id, coords}) => {
-    const [entitiy, setEntity] = useState(GameState.getEntityById(id));
-    
+    const [entity, setEntity] = useState(GameState.getEntityById(id));
+    const [scale, setScale] = useState(1); // Add this line
 
     useEffect(() => {
         // What to do when the observer is triggered
@@ -14,15 +13,19 @@ const GoldTile = ({id, coords}) => {
             }
         };
 
-        
         // add observer to GameState
-        GameState.addObserver(`entityEdited${entitiy.id}`, entityObserver);
+        GameState.addObserver(`entityEdited${entity.id}`, entityObserver);
 
         // removeObserver if component is unmounted
         return () => {
-        GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
+            GameState.removeObserver(`entityEdited${entity.id}`, entityObserver);
         };
-    }, [id, entitiy?.id]);
+    }, [id, entity?.id]);
+
+    useEffect(() => {
+        let scaleValue = 1 * (entity.remainingResource / entity.totalResource);
+        setScale(scaleValue);
+    }, [entity]);
 
     return (
         <div
@@ -45,31 +48,18 @@ const GoldTile = ({id, coords}) => {
             <img
                 width="100%"
                 height="auto"
-                src="https://static.wikia.nocookie.net/ageofempires/images/4/49/Aoe2de_gold.png" 
+                src="./gold_iron_ore.webp" 
                 style={{
                     position: "absolute",
                     zIndex: 1,
                     top: 0,
                     left: 0,
+                    width: '50%',
+                    height: '135%',
                     pointerEvents: "none",
-                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(0.5, 1.5)"
-                }} 
-            />
-            <div style={
-                    {
-                        position: "absolute",
-                        zIndex: 2,
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "0.5rem",
-                    }
-                
-                }>
-                    {entitiy?.remainingResource || "E"}
-                </div>
+                    transform: `rotateZ(-45deg) rotateX(-45deg) translate(8px ,-5px) scale(${scale})`
+                }}
+                />
         </div>
     );
 };
