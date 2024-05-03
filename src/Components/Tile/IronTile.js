@@ -4,7 +4,10 @@ import GameState from '../../state/GameManager';
 
 const IronTile = ({id, coords}) => {
     const [entity, setEntity] = useState(GameState.getEntityById(id));
-    const [scale, setScale] = useState(1); // Add this line
+    const [scale, setScale] = useState(1);
+    const [showVillager, setShowVillager] = useState(false);
+    const [timeoutId, setTimeoutId] = useState(null);
+    const [prevResource, setPrevResource] = useState(0);
 
     useEffect(() => {
         // What to do when the observer is triggered
@@ -28,6 +31,25 @@ const IronTile = ({id, coords}) => {
         setScale(scaleValue);
     }, [entity]);
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const currentEntity = GameState.getEntityById(id);
+            if (currentEntity && currentEntity.remainingResource < currentEntity.totalResource && currentEntity.remainingResource !== prevResource) {
+                setShowVillager(true);
+                setPrevResource(currentEntity.remainingResource);
+            } else {
+                setShowVillager(false);
+            }
+            if(id ==='57-50') {
+            }
+        }, 3000 * Math.random() + 1500);
+
+        // Cleanup function
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [id,prevResource]);
+
     return (
         <div
         style={{
@@ -46,6 +68,18 @@ const IronTile = ({id, coords}) => {
                     imageRendering: "pixelated",
                 }} 
             />
+            {showVillager && <img 
+                src="./villager_treecut.webp"
+                style={{
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '65%',
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1) translate(-4px, -3px)",
+                    zIndex: 2,
+                }}
+            />}
             <img
                 width="100%"
                 height="auto"
