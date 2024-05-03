@@ -3,8 +3,11 @@ import GameState from '../../state/GameManager';
 
 const WoodTile = ({id, coords}) => {
     // State to hold the wood value
-    const [entitiy, setEntity] = useState(GameState.getEntityById(id));
+    const [entity, setEntity] = useState(GameState.getEntityById(id));
     const [treeImage, setTreeImage] = useState('./tree_tile_state1.webp');
+    const [showVillager, setShowVillager] = useState(false);
+    const [timeoutId, setTimeoutId] = useState(null);
+    const [prevResource, setPrevResource] = useState(0);
     const harvestInterval = useRef();
 
     useEffect(() => {
@@ -16,27 +19,26 @@ const WoodTile = ({id, coords}) => {
         };
 
         // add observer to GameState
-        GameState.addObserver(`entityEdited${entitiy.id}`, entityObserver);
+        GameState.addObserver(`entityEdited${entity.id}`, entityObserver);
 
         // removeObserver if component is unmounted
         return () => {
             clearInterval(harvestInterval.current);
-            GameState.removeObserver(`entityEdited${entitiy.id}`, entityObserver);
+            GameState.removeObserver(`entityEdited${entity.id}`, entityObserver);
         };
-    }, [id, entitiy?.id]);
-    
+    }, [id, entity?.id, timeoutId]);
 
     useEffect(() => {
         let imageSrc = '';
-        if (entitiy.remainingResource === 50) {
+        if (entity.remainingResource === 50) {
             imageSrc = './tree_tile_state1.webp';
-        } else if (entitiy.remainingResource < 50 && entitiy.remainingResource > 25) {
+        } else if (entity.remainingResource < 50 && entity.remainingResource > 25) {
             imageSrc = './tree_tile_state2.webp';
         } else {
             imageSrc = './tree_tile_state3.webp';
         }
         setTreeImage(imageSrc);
-    }, [entitiy]);
+    }, [entity]);
 
     const manualHarvest = () => {
         harvestInterval.current = setInterval(() => {
@@ -49,8 +51,26 @@ const WoodTile = ({id, coords}) => {
         console.log('cancelHarvest');
     }
 
+    useEffect(() => {
+    const intervalId = setInterval(() => {
+        const currentEntity = GameState.getEntityById(id);
+        if (currentEntity && currentEntity.remainingResource < currentEntity.totalResource && currentEntity.remainingResource !== prevResource) {
+            setShowVillager(true);
+            setPrevResource(currentEntity.remainingResource);
+        } else {
+            setShowVillager(false);
+        }
+        if(id ==='57-50') {
+        }
+    }, 3000 * Math.random() + 1500);
+
+    // Cleanup function
+    return () => {
+        clearInterval(intervalId);
+    };
+}, [id,prevResource]);
+
     return (
-        //console.log('rerender wood:', entitiy?.id),
         <div
             style={{
                 backgroundColor: "#416626",
@@ -71,7 +91,18 @@ const WoodTile = ({id, coords}) => {
                     imageRendering: "pixelated",
                 }} 
             />
-            <img
+            {showVillager && <img 
+                src="./villager_treecut.webp"
+                style={{
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '65%',
+                    transform: "rotateZ(-45deg) rotateX(-45deg) scale(1.1, 3.1) translate(-4px, 0px)",
+                }}
+            />}
+            <img  
                 width="100%"
                 height="auto"
                 src={treeImage}

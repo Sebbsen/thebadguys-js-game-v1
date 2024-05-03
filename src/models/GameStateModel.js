@@ -201,7 +201,7 @@ class GameStateModel {
     // actions
     HarvestWood(id, productionRate) {
         const myWoodModel = this.getEntityById(id);
-        this.editEntity(myWoodModel, 'remainingResource', myWoodModel.remainingResource - productionRate);
+        this.editEntity(myWoodModel, 'remainingResource', myWoodModel.updateResource(-productionRate));
         this.addWood(productionRate);
         if (myWoodModel.remainingResource <= 0) {
             this.removeEntity(myWoodModel);

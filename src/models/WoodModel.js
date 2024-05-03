@@ -4,11 +4,14 @@ class WoodModel {
         this.coords = id.split('-');
         this.totalResource = totalResource;
         this.remainingResource = remainingResource;
+        this.prevResource = remainingResource;
         this.type = 'wood';
     }
   
     updateResource(amount) {
+        this.prevResource = this.remainingResource;
         this.remainingResource += amount;
+        return this.remainingResource;
     }
 
 }
